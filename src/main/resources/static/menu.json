@@ -1,0 +1,31 @@
+[
+	{
+		"title":"Gateway",
+		"url": "/pages/gateway.html",
+		"icon":"fa fa-bank"
+	},{
+		"title":"Devices",
+		"url": "",
+		"icon":"fa fa-sitemap",
+		"children":[{
+			"title":"Dashboard",
+			"url": "/pages/devices/dashboard.html",
+			"icon":""
+		}]
+	},{
+		"title":"Multimedia",
+		"url": "/pages/multimedia.html",
+		"icon":"fa fa-camera",
+		"children":[]
+	},{
+		"title":"Export",
+		"url": "/pages/export.html",
+		"icon":"fa fa-share",
+		"children":[]
+	},{
+		"title":"Rule Engine",
+		"url": "/pages/ruleengine.html",
+		"icon":"fa fa-wrench",
+		"children":[]
+	}
+]
