@@ -15,7 +15,7 @@
  * @version: 0.1.0
  *******************************************************************************/
 $(document).ready(function(){
-	//动态获取菜单数据
+	//get menu data dynamically.
 	$.ajax({
 		url:"/menu.json",
 		type:"GET",
@@ -24,43 +24,69 @@ $(document).ready(function(){
 			menuRender(menu);
 		}
 	}); 	
+	
+	//logout control
+	$(".headbar li.logout").on("click",function(){
+		
+	});
+	
+	//user information control
+	$(".headbar li.user").on("click",function(){
+		$(".msgbox").load("/pages/userInfo.html")
+		$(".msgbox").animate({"right":"0"},"fast");
+		$(".shelter_layer").show("fast");
+	});
+	
+	//notification control
+	$(".headbar li.notification").on("click",function(){
+		$(".msgbox").load("/pages/notification.html")
+		$(".msgbox").animate({"right":"0"},"fast");
+		$(".shelter_layer").show("fast");
+	});
+	
+	//globe shelter control
+	$(".shelter_layer").on("click",function(){
+		$(".shelter_layer").hide("fast");
+		$(".msgbox").animate({"right":"-400px"},"fast");
+	});
+	
+	//render side_bar menu dynamically when load index page.
+	function menuRender(data){
+		for(var i=0; i<data.length;i++){
+			var menu = data[i];
+			var subMenu = menu.children;
+			var str = '<li url="' + menu.url + '"><i class="fa fa-caret-right" style="visibility:hidden"></i><i class="'+menu.icon+'"></i><span>'+menu.title+'</span></li>';
+			if( subMenu != null && subMenu.length != 0 ){
+				str = '<li><i class="fa fa-caret-right"></i><i class="' + menu.icon + '"></i><span>'+menu.title+'</span><div style="display:none"><ul></ul></div></li>';
+				$(".sidebar ul:first").append(str);
+				for(var j = 0; j < subMenu.length; j++){
+					$(".sidebar ul:first > li:last ul").append('<li url="' + subMenu[j].url + '"><i class="'+subMenu[j].icon+'"></i><span>'+subMenu[j].title+'<span></li>');
+				}
+				continue;
+			}
+			$(".sidebar ul:first").append(str);
+		}
+		//bind menu event of click
+		$(".sidebar li").on('click',function(event){
+			event.stopPropagation();//prevent event propagate to parent node when click on current node
+			//if not leaf node,expand current node.
+			if($(this).find("li").length != 0){
+				//toggle menu icon when expand current node.
+				$(this).find("i:first").toggleClass(function() {
+					if ($(this).hasClass("fa fa-caret-right")) {
+						$(this).removeClass();
+						return 'fa fa-caret-down';
+					} else {
+						$(this).removeClass();
+						return 'fa fa-caret-right';
+					}
+				});
+				$(this).children("div").slideToggle("normal");
+				return;
+			}
+			//if current node is leaf node，load html resource.
+			$(".center").load($(this).attr("url"));
+		});
+	}
 });
 
-//动态渲染侧边栏菜单
-function menuRender(data){
-	for(var i=0; i<data.length;i++){
-		var menu = data[i];
-		var subMenu = menu.children;
-		var str = '<li url="' + menu.url + '"><i class="fa fa-caret-right" style="visibility:hidden"></i><i class="'+menu.icon+'"></i><span>'+menu.title+'</span></li>';
-		if( subMenu != null && subMenu.length != 0 ){
-			str = '<li><i class="fa fa-caret-right"></i><i class="' + menu.icon + '"></i><span>'+menu.title+'</span><div style="display:none"><ul></ul></div></li>';
-			$(".sidebar ul:first").append(str);
-			for(var j = 0; j < subMenu.length; j++){
-				$(".sidebar ul:first > li:last ul").append('<li url="' + subMenu[j].url + '"><i class="'+subMenu[j].icon+'"></i><span>'+subMenu[j].title+'<span></li>');
-			}
-			continue;
-		}
-		$(".sidebar ul:first").append(str);
-	}
-	//绑定菜单点击事件
-	$(".sidebar li").on('click',function(event){
-		event.stopPropagation();//阻止点击子节点触发父节点的事件传播
-		//如果当前节点非叶子节点，展开当前节点
-		if($(this).find("li").length != 0){
-			//展开下拉菜单时切换图标
-			$(this).find("i:first").toggleClass(function() {
-				if ($(this).hasClass("fa fa-caret-right")) {
-					$(this).removeClass();
-					return 'fa fa-caret-down';
-				} else {
-					$(this).removeClass();
-					return 'fa fa-caret-right';
-				}
-			});
-			$(this).children("div").slideToggle("normal");
-			return;
-		}
-		//如果当前节点是叶子节点，加载资源
-		$(".center").load($(this).attr("url"));
-	});
-}

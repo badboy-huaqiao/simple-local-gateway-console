@@ -8,8 +8,12 @@
 		"url": "",
 		"icon":"fa fa-sitemap",
 		"children":[{
-			"title":"Dashboard",
-			"url": "/pages/devices/dashboard.html",
+			"title":"Device Profile",
+			"url": "/pages/devices/deviceProfile.html",
+			"icon":""
+		},{
+			"title":"Device Service",
+			"url": "/pages/devices/deviceService.html",
 			"icon":""
 		}]
 	},{
