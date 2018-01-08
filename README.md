@@ -5,6 +5,11 @@ Copyright © 2017-2018 VMware, Inc. All Rights Reserved.
 EdgeX Foundry local gateway devices management platform
 
 
+## why need simple-local-gateway-console
+
+1.  After the user runs the EdgeX Foundry,they often do not know what to do next,the console will help users to quickly use and understand EdgeX Foundry.
+2. For developers to test, they don't have to assemble complex JSON data in order to add a device,etc.
+
 ## program language:
 
 *   javascript
