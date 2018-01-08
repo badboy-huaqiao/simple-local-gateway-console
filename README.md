@@ -10,7 +10,7 @@ EdgeX Foundry local gateway devices management platform
 1.  After the user runs the EdgeX Foundry,they often do not know what to do next,the console will help users to quickly use and understand EdgeX Foundry.
 2. For developers to test, they don't have to assemble complex JSON data in order to add a device,etc.
 
-## program language:
+## program language and third-party framework:
 
 *   javascript
 *   css
@@ -36,7 +36,7 @@ EdgeX Foundry local gateway devices management platform
 	zuul.routes.core-metadata.url=http://edgex_foundry_host:48081/
 
 
-## how to use:
+## how to start:
 
 copy the jar package which in the docker-files directory to your host
 execute the following command
