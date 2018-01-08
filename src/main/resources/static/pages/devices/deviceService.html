@@ -164,7 +164,7 @@ label:hover  {
 	<div id="add_device_content">
 		<div>
 			<h4>
-				<span class="label label-default">new device profile</span>
+				<span class="label label-default">new device related profile</span>
 			</h4>
 		</div>
 		<div class="related_profile">
@@ -197,7 +197,7 @@ label:hover  {
 		</div>
 		<div>
 			<h4>
-				<span class="label label-default">new device basic msg</span>
+				<span class="label label-default">new device info</span>
 			</h4>
 		</div>
 		<div class="new_device_msg">
@@ -240,11 +240,24 @@ label:hover  {
 						<td>name</td>
 						<td><input type="text" name="name" placeholder="unique and required" required></td>
 						<td>method</td>
-						<td><input type="text" name="method" placeholder="POST,GET .e.g uppercase"></td>
+						<td>
+							<select name="method">
+								<option value="POST">POST</option>
+								<option value="GET">GET</option>
+							</select>
+						</td>
 					</tr>
 					<tr>
 						<td>protocol</td>
-						<td><input type="text" name="protocol" placeholder="HTTP,TCP,MAC,ZMQ,OTHER .e.g uppercase"></td>
+						<td>
+							<select name="protocol">
+								<option value="HTTP">HTTP</option>
+								<option value="TCP">TCP</option>
+								<option value="MAC">MAC</option>
+								<option value="ZMQ">ZMQ</option>
+								<option value="OTHER">OTHER</option>
+							</select>
+						</td>
 						<td>address</td>
 						<td><input type="text" name="address"></td>
 					</tr>
