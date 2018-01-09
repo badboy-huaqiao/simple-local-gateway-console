@@ -20,102 +20,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<style type="text/css">
-#device_service_btn {
-	margin-bottom: 10px;
-}
-
-#device_service_btn div.alert-warning {
-	display: none;
-}
-
-#add_device_content {
-	position: absolute;
-	left: 0;
-	top: 0;
-	right: 0;
-	bottom: 0;
-	display: none;
-	background-color: white;
-	padding: 10px;
-}
-
-#add_device_content h4  {
-	margin-bottom: 3px;
-}
-
-#add_device_content  input {
-	width: 200px;
-}
-
-#add_device_content  select {
-	width: 200px;
-}
-
-.new_device_msg, .new_device_addressable, .related_service , .related_profile {
-	padding: 5px;
-	border: 1px solid gray;
-	margin-bottom: 10px;
-}
-
-.new_device_msg table , 
-.new_device_addressable table ,
-.related_profile table {
-	border-collapse: separate;
-	
-}
-
-.new_device_msg table td, 
-.new_device_addressable table td,
-.related_profile table td {
-	padding: 10px;
-	text-align: center;
-}
-
-.btn_group {
-	text-align: center;
-}
-
-.btn_group button:first-child {
-	margin-right: 150px;
-}
-
-.device_server_shelter {
-	position: fixed;
-	top: 0;
-	bottom: 0;
-	left: 0;
-	right: 0;
-	z-index: 100;
-	display: none;
-}
-
-.device_server_shelter div.shelter{
-	position: absolute;
-	width:100%;
-	height:100%;
-	background-color: #339933;
-	opacity: 0.4;
-}
-
-.device_server_shelter div:last-child {
-	position: absolute;
-	top: 50%;
-	left: 50%;
-}
-.device_server_shelter div:last-child *{
-	color: white;
-}
-#profile_file{
-	/* opacity: 0; */
-	display: none;
-}
-
-label:hover  {
-	border-bottom: 2px solid;
-	border-bottom-color:#339933; 
-}
-</style>
+<link href="/css/devices/deviceService.css" rel="stylesheet">
 <script type="text/javascript" src="/js/pages/devices/deviceService.js"></script>
 </head>
 <body>
@@ -137,7 +42,7 @@ label:hover  {
 		</button>
 
 	</div>
-
+	
 	<div id="device_service_list">
 		<table class="table table-striped ">
 			<thead>
@@ -183,7 +88,7 @@ label:hover  {
 						
 					</td>
 					<td>
-						<form method="POST" target="uploadiframe" action="/core-metadata/api/v1/deviceprofile/uploadfile" enctype="multipart/form-data" style="display: inline-block;">
+						<form method="POST" target="uploadiframe" accept=".yaml,.yml" action="/core-metadata/api/v1/deviceprofile/uploadfile" enctype="multipart/form-data" style="display: inline-block;">
 							<!-- <label for="profile_file">select</label> -->
 							<input type="file" id="profile_file" name="file" onchange="deviceServiceBtnGroup.onSelectedFileCompleted()">
 						</form>

@@ -212,7 +212,7 @@ var testData = [
         "modified": 1513828405903,
         "origin": 1513828463478,
         "description": null,
-        "name": "10.112.122.80",
+        "name": "10.112.122.80-test",
         "lastConnected": 0,
         "lastReported": 0,
         "operatingState": "enabled",
