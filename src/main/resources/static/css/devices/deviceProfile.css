@@ -1,0 +1,79 @@
+@charset "UTF-8";
+
+#device_profile_shelter {
+	position: fixed;
+	top:0;
+    right:0;
+    bottom:0;
+    left:0;
+    display: none;
+    background-color: #339933;
+    opacity: 0.3;
+    z-index: 5;
+}
+
+#device_profile_shelter {
+	display: none;
+	position:fixed;
+	
+}
+
+#device_profile_btn div:first-child {
+	display: none;
+}
+
+ div#advanced_profile_sift hr {
+	margin: 0;
+	padding: 0;
+}
+
+#add_profile_dialog {
+	position: fixed;
+	width:300px;
+	height:400px;
+	top:0;
+    right:0;
+    bottom:0;
+    left:0;
+    margin:auto;
+    border: 1px solid gray;
+    z-index: 6;
+    display: none;
+    background-color: white;
+}
+
+div#add_profile_dialog button[name='cancel'] {
+	position: absolute;
+	bottom: 10px;
+	left: 10px;
+}
+
+div#add_profile_dialog  button[name='upload']{
+	position: absolute;
+	bottom: 10px;
+	right: 10px;
+}
+
+div#add_profile_dialog form {
+	display: none;
+}
+
+div#add_profile_dialog label {
+	position:absolute;
+	width:100px;
+	height:35px;
+  	padding:5px;
+  	top:150px;
+    right:100px;
+   
+	border: 1px solid gray;
+	border-radius: 0.2em;
+	background-color:#5cb85c; 
+	text-align: center;
+}
+
+div.file_proview {
+	position:absolute;
+	top:200px;
+    right:100px;
+}

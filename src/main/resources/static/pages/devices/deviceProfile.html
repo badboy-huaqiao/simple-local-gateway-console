@@ -20,8 +20,78 @@
 <html>
 <head>
 <meta charset="UTF-8">
+<link href="/css/devices/deviceProfile.css" rel="stylesheet">
+<script src="/js/pages/devices/deviceProfile.js"></script>
 </head>
 <body>
-	<h2>device profile page,Building...</h2>
+	
+	<div id="device_profile_shelter">
+	</div>
+	
+	<div id="add_profile_dialog">
+		<label for="add_profile_upload">Select File</label>
+		<form target="upload_profile_response" action="/core-metadata/api/v1/deviceprofile/uploadfile" method="POST" enctype="multipart/form-data">
+			<input id="add_profile_upload" accept=".yaml,.yml" type="file" name="file" multiple="multiple" onchange="deviceProfileModule.onSelectFileCompleted()">
+		</form>
+		<div class="file_proview">
+		</div>
+		<button type="button" name="cancel" class="btn btn-success" onclick="deviceProfileModuleBtnGroup.cancel()">
+			<i class="fa fa-arrow-left" aria-hidden="true"></i>&nbsp;cancel
+		</button>
+		<button disabled type="button" name="upload" class="btn btn-success" onclick="deviceProfileModuleBtnGroup.uploadProfile()" >
+			<i class="fa fa-upload" aria-hidden="true"></i>&nbsp;upload
+		</button>
+		<iframe name="upload_profile_response" style="display: none;"></iframe>
+	</div>	
+
+	<div id="device_profile_btn">
+		<div class="alert alert-warning" role="alert">
+			please select at least one item.
+		</div>
+		<button type="button" class="btn btn-success" onclick="deviceProfileModuleBtnGroup.add();">
+			<i class="fa fa-plus" aria-hidden="true"></i>&nbsp;add
+		</button>
+		<button type="button" class="btn btn-success" onclick="deviceProfileModuleBtnGroup.deleteProfile();" >
+			<i class="fa fa-minus" aria-hidden="true"></i>&nbsp;delete
+		</button>
+		<button type="button" class="btn btn-success" onclick="deviceProfileModuleBtnGroup.refresh();" >
+			<i class="fa fa-refresh" aria-hidden="true"></i>&nbsp;refresh
+		</button>
+		
+	</div>
+	
+	<div id="advanced_profile_sift">
+		<!-- <a>advanced search >></a> -->
+		<hr>
+		<div>
+			
+		</div>
+	</div>
+	
+	<div id="device_profile_list">
+		
+		<table class="table table-striped ">
+			<thead>
+				<tr>
+					<th></th>
+					<th>#</th>
+					<th>ID</th>
+					<th>Profile Name</th>
+					<th>label</th>
+					<th>description</th>
+					<th>manufacturer</th>
+					<th>created time</th>
+					<th>modified time</th>
+				</tr>
+			</thead>
+			<tbody>
+			</tbody>
+			<tfoot>
+				<tr align="center">
+					<td colspan=8>no data.</td>
+				</tr>
+			</tfoot>
+		</table>
+	</div>
 </body>
 </html>
