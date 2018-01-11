@@ -20,9 +20,53 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<link href="/css/devices/device.css" rel="stylesheet">
+<script src="/js/pages/devices/device.js" ></script>
 </head>
 <body>
-	<h2>device page,Building...</h2>
+	<div id="device_advanced_search">
+		<table>
+			<tr>
+				<td>device service</td>
+				<td>
+					<select name="device_service">
+					</select>
+				</td>
+				<td>device profile</td>
+				<td>
+					<select name="device_profile">
+					</select>
+				</td>
+			</tr>
+		</table>	
+	</div>
+	<div id="device_list">
+		<table class="table table-striped ">
+			<thead>
+				<tr>
+					<th></th>
+					<th>#</th>
+					<th>ID</th>
+					<th>Device Name</th>
+					<th>Description</th>
+					<th>Label</th>
+					<th>Addressable</th>
+					<th>Admin State</th>
+					<th>Operating State</th>
+					<th>Service Name</th>
+					<th>Profile Name</th>
+					<th>Created Time</th>
+					<th>Modified Time</th>
+				</tr>
+			</thead>
+			<tbody>
+			</tbody>
+			<tfoot>
+				<tr align="center">
+					<td colspan=13>no data.</td>
+				</tr>
+			</tfoot>
+		</table>
+	</div>
 </body>
 </html>
