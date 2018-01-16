@@ -128,6 +128,7 @@ var deviceServiceBtnGroup = {
 			
 		},
 		back:function(){
+			$("#device_service_list").show();
 			$("#add_device_content").hide();
 		},
 		submit:function(){
@@ -197,6 +198,7 @@ var deviceServiceBtnGroup = {
 				return;
 			}
 			$("#add_device_content div.related_service input").val(deviceServiceModule.selectedRow.name);
+			$("#device_service_list").hide();
 			$("#add_device_content").show();
 		},
 		refresh:function(){
