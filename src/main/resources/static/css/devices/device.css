@@ -16,6 +16,19 @@
  *******************************************************************************/
 @charset "UTF-8";
 
+#device_advanced_search{
+	float: right;
+}
+
+#device_btngroup{
+	float:left;
+}
+
+.divide_line{
+	border-bottom: 1px solid gray;
+	clear: both;
+}
+
 #device_advanced_search table td{
 	padding: 10px;
 	font-weight: bold;
@@ -38,4 +51,15 @@
 
 th, td {
   text-align: center;
+}
+
+#device_detail {
+	display: none;
+	position: absolute;
+	top: 0;
+	bottom: 0;
+	left: 0;
+	right: 0;
+	background-color: white;
+	padding: 10px;
 }
