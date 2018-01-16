@@ -129,6 +129,7 @@
 .center {
 	position: absolute;
 	max-width: 100%;
+	min-height: 100%;
 	left: 200px;
 	top: 60px;
 	padding: 0;
@@ -136,6 +137,8 @@
 	padding: 0 10px;
 	padding-top: 10px;
 	z-index: 0;
-	overflow: hidden;
+	overflow-x: hidden;
+	/* overflow-y: visible; */
 	/* border: 1px solid red; *//* debugger */
+	
 }
