@@ -14,10 +14,21 @@
  * @author: Huaqiao Zhang, <huaqiaoz@vmware.com>
  * @version: 0.1.0
  *******************************************************************************/
+
 $(document).ready(function(){
+	//global ajax setting to redirect to login when session timeout or user logout
+	//don't worry about user bypass it,the back-end has set permission to pass if user logout or session timeout.
+	//it just improve user experience.
+	$.ajaxSetup({
+		statusCode: {
+			302: function() {
+				window.location.href='/';
+			}
+		}
+	});
 	//get menu data dynamically.
 	$.ajax({
-		url:"/menu.json",
+		url:"/data/menu.json",
 		type:"GET",
 		success:function(data){
 			var menu = eval(data);
@@ -27,7 +38,13 @@ $(document).ready(function(){
 	
 	//logout control
 	$(".headbar li.logout").on("click",function(){
-		
+		$.ajax({
+			url:'/logout',
+			type:'GET',
+			success:function(){
+				window.location.href='/';
+			}
+		});
 	});
 	
 	//user information control
