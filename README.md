@@ -44,15 +44,16 @@ find application.properties file , and modify the host_ip of yours
 
 ## how to start:
 
-copy the docker-files folder to your host.
-Modify the proxy path IP in the application.properties file,IP that points to the EdgeX Foundry host.
+*   copy the docker-files folder to your host.
+*   Modify the proxy path IP in the application.properties file,IP that points to the EdgeX Foundry host.
+*   the administrator account is admin/admin,you can custom account in application.properties file before you start the app.
 
 Under the docker-files folder,execute the following command:
 
 	java -jar -Dspring.config.location=./application.properties simple-local-gateway-console.jar &
 
 	
-then enter the http://your_host:4000 in the browser,the administrator account is admin/admin,you can custom account in application.properties file before you start the app.
+then enter the http://your_host:4000 in the browser
 
 or you can  pull the whole project to your Eclipse IDE(Recommend STS IDE).
 
