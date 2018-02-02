@@ -52,7 +52,7 @@ Under the docker-files folder,execute the following command:
 	java -jar -Dspring.config.location=./application.properties simple-local-gateway-console.jar &
 
 	
-then enter the http://your_host:4000 in the browser
+then enter the http://your_host:4000 in the browser,the admin account and pwd  is root/root.
 
 or you can  pull the whole project to your Eclipse IDE(Recommend STS IDE).
 
@@ -60,7 +60,6 @@ or you can  pull the whole project to your Eclipse IDE(Recommend STS IDE).
 
 1.  Will be supported to run in docker
 2.  Gradually improve other functions
-3.  User login authority management
 
 
 
