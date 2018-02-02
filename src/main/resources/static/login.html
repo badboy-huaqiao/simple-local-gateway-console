@@ -98,9 +98,7 @@
 	
 </body>
 <script src="/webjars/jquery/jquery.min.js"></script>
-<script src="/webjars/bootstrap/js/bootstrap.min.js"></script>
 <script type="text/javascript">
-
 	function login(){
 		var name = $("#userName").val();
 		var pwd = $("#userPwd").val();
@@ -110,7 +108,6 @@
 			contentType:'application/json',
 			data:JSON.stringify({'userName':name,'userPwd':pwd}),
 			success:function(data){
-				//window.localStorgge.setItem('user',{});
 				window.location.href='/'
 			}
 		});
@@ -118,7 +115,6 @@
 	}
 	
 	$(document).ready(function(){
-		/* $("div.login_home form") */
 		$(".login_form button").on('click',function(){
 			login();
 		});
