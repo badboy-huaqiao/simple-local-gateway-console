@@ -122,6 +122,11 @@
 		$(".login_form button").on('click',function(){
 			login();
 		});
+		document.addEventListener('keyup',(event) => {
+			if(event.key == 'Enter'){
+				login();
+			}
+		},false);
 	});
 </script>
 </html>
