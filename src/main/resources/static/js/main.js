@@ -20,9 +20,10 @@ $(document).ready(function(){
 	//don't worry about user bypass it,the back-end has set permission to pass if user logout or session timeout.
 	//it just improve user experience.
 	$.ajaxSetup({
+		cache:false,//prevent browser cache result to redirect  failed.
 		statusCode: {
 			302: function() {
-				window.location.href='/';
+				window.location.href='/?ran='+Math.random(); //prevent browser cache result to redirect  failed.
 			}
 		}
 	});
@@ -39,10 +40,10 @@ $(document).ready(function(){
 	//logout control
 	$(".headbar li.logout").on("click",function(){
 		$.ajax({
-			url:'/logout',
+			url:'/logout?ran='+Math.random(),
 			type:'GET',
 			success:function(){
-				window.location.href='/';
+				window.location.href='/?ran='+Math.random();
 			}
 		});
 	});

@@ -30,7 +30,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import edgexfoundry.domain.User;
 
 @Controller
-public class LoginController {
+public class AuthController {
 	
 	@Value(value = "${USER_NAME}")
 	private String userName;
@@ -42,7 +42,8 @@ public class LoginController {
 	public void login(@RequestBody User user,HttpServletRequest req,HttpServletResponse resp) throws Exception{
 		System.out.println(user.getUserPwd());
 		if(user.getUserName().equals(userName) || user.getUserPwd().equals(userPwd)) {
-			//登录的应该使用表单，否则如果使用user bean的模式，那么用户的password也会存在内存中，不安全
+			//should use form to login , if not the user's pwd will be in memory,it's not safe.
+			//i will replace this approach of login
 			req.getSession().setAttribute("user", user);
 		}
 		//resp.sendRedirect("http://localhost:4000");
@@ -54,7 +55,7 @@ public class LoginController {
 	public void logout(HttpServletRequest req,HttpServletResponse resp) throws Exception{
 		HttpSession session = req.getSession();
 		session.invalidate();
-		//resp.sendRedirect("http://localhost:4000");
+		//resp.sendRedirect(req.getContextPath()+"/");
 		return ;
 	}
 }

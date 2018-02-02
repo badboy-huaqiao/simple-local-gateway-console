@@ -24,7 +24,7 @@ import org.springframework.cloud.netflix.zuul.EnableZuulProxy;
 @SpringBootApplication
 @EnableZuulProxy
 @ServletComponentScan
-public class Application {
+public class Application{
 	
 	public static void main(String[] args) {
 		SpringApplication.run(Application.class, args);
