@@ -4,6 +4,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -15,12 +16,17 @@ import edgexfoundry.domain.User;
 @Controller
 public class LoginController {
 	
+	@Value(value = "${USER_NAME}")
+	private String userName;
+	@Value("${USER_PWD}")
+	private String userPwd;
+	
 	@RequestMapping(value="/loginVerify",method=RequestMethod.POST)
 	@ResponseBody
 	public void login(@RequestBody User user,HttpServletRequest req,HttpServletResponse resp) throws Exception{
 		System.out.println(user.getUserPwd());
-		if(user.getUserName().equals("root") || user.getUserPwd().equals("root")) {
-			//登录的应该使用表单，否则使用user bean的模式，那么用户的password也会存在内存中，不安全
+		if(user.getUserName().equals(userName) || user.getUserPwd().equals(userPwd)) {
+			//登录的应该使用表单，否则如果使用user bean的模式，那么用户的password也会存在内存中，不安全
 			req.getSession().setAttribute("user", user);
 		}
 		//resp.sendRedirect("http://localhost:4000");
