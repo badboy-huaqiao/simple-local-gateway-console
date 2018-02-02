@@ -70,10 +70,6 @@ div#add_profile_dialog  button[name='upload']{
 	right: 10px;
 }
 
-div#add_profile_dialog form {
-	display: none;
-}
-
 div#add_profile_dialog label {
 	position:absolute;
 	width:100px;

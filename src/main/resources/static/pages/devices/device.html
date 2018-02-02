@@ -21,52 +21,128 @@
 <head>
 <meta charset="UTF-8">
 <link href="/css/devices/device.css" rel="stylesheet">
-<script src="/js/pages/devices/device.js" ></script>
 </head>
 <body>
-	<div id="device_advanced_search">
-		<table>
-			<tr>
-				<td>device service</td>
-				<td>
-					<select name="device_service">
-					</select>
-				</td>
-				<td>device profile</td>
-				<td>
-					<select name="device_profile">
-					</select>
-				</td>
-			</tr>
-		</table>	
-	</div>
-	<div id="device_list">
-		<table class="table table-striped ">
-			<thead>
+	<div id="device_main">
+		<div id="device_advanced_search">
+			<table>
 				<tr>
-					<th></th>
-					<th>#</th>
-					<th>ID</th>
-					<th>Device Name</th>
-					<th>Description</th>
-					<th>Label</th>
-					<th>Addressable</th>
-					<th>Admin State</th>
-					<th>Operating State</th>
-					<th>Service Name</th>
-					<th>Profile Name</th>
-					<th>Created Time</th>
-					<th>Modified Time</th>
+					<td>device service</td>
+					<td>
+						<select name="device_service">
+						</select>
+					</td>
+					<td>device profile</td>
+					<td>
+						<select name="device_profile">
+						</select>
+					</td>
 				</tr>
-			</thead>
-			<tbody>
-			</tbody>
-			<tfoot>
-				<tr align="center">
-					<td colspan=13>no data.</td>
-				</tr>
-			</tfoot>
-		</table>
+			</table>	
+		</div>
+		<div id="device_btngroup">
+			<!-- <button type="button" class="btn btn-success" onclick="deviceModuleBtnGroup.add();">
+				<i class="fa fa-plus" aria-hidden="true"></i>&nbsp;add
+			</button> -->
+			<button type="button" class="btn btn-success" onclick="deviceModuleBtnGroup.deleteDevice();" >
+				<i class="fa fa-minus" aria-hidden="true"></i>&nbsp;delete
+			</button>
+			<button type="button" class="btn btn-success" onclick="deviceModuleBtnGroup.detail();" >
+				<i class="fa fa-book" aria-hidden="true"></i>&nbsp;detail
+			</button>
+			
+		</div>
+		<div class="divide_line"></div>
+		<div id="device_list">
+			<table class="table table-striped ">
+				<thead>
+					<tr>
+						<th></th>
+						<th>#</th>
+						<th>ID</th>
+						<th>Device Name</th>
+						<th>Description</th>
+						<th>Label</th>
+						<!-- <th>Addressable</th> -->
+						<th>Admin State</th>
+						<th>Operating State</th>
+						<!-- <th>Service Name</th>
+						<th>Profile Name</th> -->
+						<th>Created Time</th>
+						<th>Modified Time</th>
+					</tr>
+				</thead>
+				<tbody>
+				</tbody>
+				<tfoot>
+					<tr align="center">
+						<td colspan=13>no data.</td>
+					</tr>
+				</tfoot>
+			</table>
+		</div>
+	</div>
+	
+	<div id="device_detail">
+		<div class="show_detail_operation">
+			<button type="button" class="btn btn-success" onclick="deviceModuleBtnGroup.back();">
+				<i class="fa fa-arrow-left" aria-hidden="true"></i>&nbsp;back
+			</button>
+		</div>
+		<div class="divide_line"></div>
+		<div class="panel panel-default">
+		  <div class="panel-heading">device intro</div>
+		  <div class="panel-body">
+		    <table id="device_basic_intro">
+				<tbody>
+					<tr>
+						<td>ID</td>
+						<td><input type="text" name="id" ></td>
+					</tr>
+					<tr>
+						<td>name</td>
+						<td><input type="text" name="name" ></td>
+					</tr>
+					<tr>
+						<td>description</td>
+						<td><input type="text" name="description" ></td>
+					</tr>
+					<tr>
+						<td>address</td>
+						<td><input type="text" name="address" ></td>
+					</tr>
+					<tr>
+						<td>profile name</td>
+						<td><input type="text" name="profile_name" ></td>
+					</tr>
+					<tr>
+						<td>service name</td>
+						<td><input type="text" name="service_name" ></td>
+					</tr>
+				</tbody>
+			</table>
+		  </div>
+		</div>
+		
+		<div class="panel panel-default" id="command_list">
+			  <div class="panel-heading">commands</div>
+			  <div class="panel-body">
+				<table class="table table-striped">
+					<thead>
+						<tr>
+							<th>command name</th>
+							<th>method</th>
+							<th>reading value</th>
+							<th>parameter</th>
+							<th>operation</th>
+						</tr>
+					</thead>
+					<tbody>
+					</tbody>
+				</table>
+			  </div>
+		</div>
 	</div>
 </body>
+<script src="/js/pages/devices/device.js" ></script>
 </html>

@@ -21,16 +21,15 @@
 <head>
 <meta charset="UTF-8">
 <link href="/css/devices/deviceProfile.css" rel="stylesheet">
-<script src="/js/pages/devices/deviceProfile.js"></script>
 </head>
 <body>
 	
 	<div id="device_profile_shelter">
 	</div>
 	
-	<div id="add_profile_dialog">
+	<div id="add_profile_dialog" style="display:none;">
 		<label for="add_profile_upload">Select File</label>
-		<form target="upload_profile_response" action="/core-metadata/api/v1/deviceprofile/uploadfile" method="POST" enctype="multipart/form-data">
+		<form style="display:none;" target="upload_profile_response" action="/core-metadata/api/v1/deviceprofile/uploadfile" method="POST" enctype="multipart/form-data">
 			<input id="add_profile_upload" accept=".yaml,.yml" type="file" name="file" multiple="multiple" onchange="deviceProfileModule.onSelectFileCompleted()">
 		</form>
 		<div class="file_proview">
@@ -94,4 +93,5 @@
 		</table>
 	</div>
 </body>
+<script src="/js/pages/devices/deviceProfile.js"></script>
 </html>

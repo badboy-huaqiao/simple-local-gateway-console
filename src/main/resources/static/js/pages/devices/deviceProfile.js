@@ -94,6 +94,11 @@ var deviceProfileModuleBtnGroup = {
 	},
 	deleteProfile:function(){
 		var del_item = deviceProfileModule.selectedRow.length;
+		if(del_item == 0){
+			alert("please select one item at least.");
+			return false;
+			
+		}
 		if(!window.confirm('are you sure to delete ?')){
 			return false;
 		}

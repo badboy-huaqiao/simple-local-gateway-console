@@ -20,8 +20,8 @@ public class LoginController {
 	public void login(@RequestBody User user,HttpServletRequest req,HttpServletResponse resp) throws Exception{
 		System.out.println(user.getUserPwd());
 		if(user.getUserName().equals("root") || user.getUserPwd().equals("root")) {
-			req.getSession().setAttribute("userId", user.getUserId());
-			req.getSession().setAttribute("userPwd", user.getUserPwd());
+			//登录的应该使用表单，否则使用user bean的模式，那么用户的password也会存在内存中，不安全
+			req.getSession().setAttribute("user", user);
 		}
 		//resp.sendRedirect("http://localhost:4000");
 		return ;

@@ -16,7 +16,7 @@
  *******************************************************************************/
 
 $(document).ready(function(){
-	//global ajax setting to redirect to login when session timeout or user logout
+	//global ajax setting to redirect to login when session timeout (but use stay in old page) or user logout
 	//don't worry about user bypass it,the back-end has set permission to pass if user logout or session timeout.
 	//it just improve user experience.
 	$.ajaxSetup({

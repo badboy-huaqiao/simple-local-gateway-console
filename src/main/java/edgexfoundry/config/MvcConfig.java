@@ -12,7 +12,8 @@ public class MvcConfig extends WebMvcConfigurerAdapter {
 		@Override
 		public void addViewControllers(ViewControllerRegistry registry) {
 			registry.addViewController("/").setViewName("index.html");
-			registry.addViewController("/login").setViewName("login.html");
+			//if you have declare '/login' path in Controller class,this will be invalid or conflict to Controller class.
+			registry.addViewController("/loginPage").setViewName("login.html"); 
 			registry.setOrder(Ordered.HIGHEST_PRECEDENCE);
 		}	
 }
