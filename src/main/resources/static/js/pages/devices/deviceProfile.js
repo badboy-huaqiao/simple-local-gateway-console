@@ -40,7 +40,7 @@ var deviceProfileModule = {
 				deviceProfileModule.profileDataCache = data;
 			},
 			error: function(){
-				alert("error.")
+				//alert("error.")
 			}
 		});
 	},
