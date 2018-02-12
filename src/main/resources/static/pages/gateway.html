@@ -20,9 +20,42 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>Gateway Management</title>
 </head>
 <body>
-	<h2>Gateway page,Building...</h2>
+	<div id="gateway_button_group">
+		<button type="button" class="btn btn-success" onclick="gatewayManagementModuleBtnGroup.add();" >
+			<i class="fa fa-plus" aria-hidden="true"></i>&nbsp;add
+		</button>
+		<button type="button" class="btn btn-success" onclick="gatewayManagementModuleBtnGroup.refresh();" >
+			<i class="fa fa-refresh" aria-hidden="true"></i>&nbsp;refresh
+		</button>
+	</div>
+	<div id="gateway_list">
+		<table class="table table-striped ">
+			<thead>
+				<tr>
+					<th></th>
+					<th>#</th>
+					<th>ID</th>
+					<th>Gateway Name</th>
+					<th>Description</th>
+					<th>Address</th>
+					<th>Created Time</th>
+				</tr>
+			</thead>
+			<tbody>
+			</tbody>
+			<tfoot>
+				<tr align="center">
+					<td colspan=7>no data.</td>
+				</tr>
+			</tfoot>
+		</table>
+	</div>
+	<div id="current_gateway_intro">
+		
+	</div>
 </body>
+<script src="/js/pages/gateway.js" ></script>
 </html>
