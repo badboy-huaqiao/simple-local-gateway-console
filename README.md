@@ -57,6 +57,12 @@ then enter the http://your_host:4000 in the browser
 
 or you can  pull the whole project to your Eclipse IDE(Recommend STS IDE).
 
+
+## Completed functions
+
+1.  Device,Device Service,Device Profile CRUD.
+2.  Gateway(multi-instances)management sharing one web UI.
+3.  user login auth.
 ## the further 
 
 1.  Will be supported to run in docker
