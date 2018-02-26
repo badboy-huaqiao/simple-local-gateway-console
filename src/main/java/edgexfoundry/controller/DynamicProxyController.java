@@ -27,6 +27,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import edgexfoundry.config.ZuulDynamicProxyConfig;
+import edgexfoundry.domain.GatewayInfo;
 
 @Controller
 public class DynamicProxyController {
@@ -37,6 +38,13 @@ public class DynamicProxyController {
 			synchronized (ZuulDynamicProxyConfig.class) {
 				ZuulDynamicProxyConfig.getProxymapping().put(req.getSession().getId(), originHostIP.get("hostIP"));
 			}
+			return "success";
+		}
+		
+		@RequestMapping(value="/gateway",method=RequestMethod.POST)
+		@ResponseBody
+		public String save(@RequestBody GatewayInfo gatewayInfo) {
+			
 			return "success";
 		}
 	

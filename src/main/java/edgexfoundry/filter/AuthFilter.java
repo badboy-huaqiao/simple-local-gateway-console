@@ -50,7 +50,7 @@ public class AuthFilter implements Filter{
 		if(	reqPath.endsWith(".css") 
 				|| reqPath.endsWith(".js")
 				|| reqPath.endsWith(".html")
-				|| reqPath.equals("/loginVerify")
+				|| reqPath.equals("/auth/login")
 				|| reqPath.equals("/loginPage")) {
 				chain.doFilter(request, response);
 				return;

@@ -103,12 +103,12 @@
 		var name = $("#userName").val();
 		var pwd = $("#userPwd").val();
 		$.ajax({
-			url:'/loginVerify',
+			url:'/auth/login',
 			type:'POST',
 			contentType:'application/json',
 			data:JSON.stringify({'userName':name,'userPwd':pwd}),
 			success:function(data){
-				window.location.href='/'
+				window.location.href='/?ran=' + Math.random();
 			}
 		});
 		

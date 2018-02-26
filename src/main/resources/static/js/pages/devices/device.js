@@ -87,7 +87,6 @@ var deviceModule = {
 					//bind onchange event.
 					$("#device_advanced_search select[name='device_service']").on('change',function(){
 						var v = $(this).val();
-						debugger
 						if(v != '') {
 							$.ajax({
 								url:'/core-metadata/api/v1/device/servicename/' + v + '',

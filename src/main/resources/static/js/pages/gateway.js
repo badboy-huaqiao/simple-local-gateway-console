@@ -70,7 +70,7 @@ var gatewayManagementModule = {
 				contentType:'application/json',
 				data:JSON.stringify(param),
 				success:function(data){
-					alert("you hava change gateway to " + gatewayManagementModule.selectedRow.name);
+					alert("Already change gateway to " + gatewayManagementModule.selectedRow.name);
 				}
 			});
 		});
@@ -109,7 +109,7 @@ var gatewayListDataTest = [
 		'id':'1234567890',
 		'name':'test-gateway-01',
 		'description':'this just test-01',
-		'address':'10.117.170.136',
+		'address':'10.112.122.222',
 		'created':1513156359765
 	},{
 		'id':'0987654321',
