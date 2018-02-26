@@ -37,11 +37,11 @@ public class AuthController {
 	@Value("${USER_PWD}")
 	private String userPwd;
 	
-	@RequestMapping(value="/loginVerify",method=RequestMethod.POST)
+	@RequestMapping(value="/auth/login",method=RequestMethod.POST)
 	@ResponseBody
 	public void login(@RequestBody User user,HttpServletRequest req,HttpServletResponse resp) throws Exception{
 		System.out.println(user.getUserPwd());
-		if(user.getUserName().equals(userName) || user.getUserPwd().equals(userPwd)) {
+		if(user.getUserName().equals(userName) && user.getUserPwd().equals(userPwd)) {
 			//should use form to login , if not the user's pwd will be in memory,it's not safe.
 			//i will replace this approach of login
 			req.getSession().setAttribute("user", user);
@@ -50,7 +50,7 @@ public class AuthController {
 		return ;
 	}
 	
-	@RequestMapping(value="/logout",method=RequestMethod.GET)
+	@RequestMapping(value="/auth/logout",method=RequestMethod.GET)
 	@ResponseBody
 	public void logout(HttpServletRequest req,HttpServletResponse resp) throws Exception{
 		HttpSession session = req.getSession();
