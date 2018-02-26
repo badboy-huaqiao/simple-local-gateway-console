@@ -35,12 +35,12 @@ find application.properties file , and modify the host_ip of yours
 
 	zuul.routes.core-command.path=/core-command/**
 	
-	#there will be dynamic revserse proxy,don't config there if you want to manage multi-gateway
+	#there will be dynamic revserse proxy,don't hard-code config if you want to manage multi-gateway
 	zuul.routes.core-command.url=http://edgex_foundry_host:48082/
 	
 	zuul.routes.core-metadata.path=/core-metadata/**
 	
-	#there will be dynamic revserse proxy,don't config there if you want to manage multi-gateway
+	#there will be dynamic revserse proxy,don't hard-code config if you want to manage multi-gateway
 	zuul.routes.core-metadata.url=http://edgex_foundry_host:48081/
 
 
