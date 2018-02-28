@@ -16,11 +16,14 @@
  *******************************************************************************/
 package edgexfoundry.controller;
 
+import java.util.List;
 import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -28,10 +31,15 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import edgexfoundry.config.ZuulDynamicProxyConfig;
 import edgexfoundry.domain.GatewayInfo;
+import edgexfoundry.repository.GatewayInfoRepository;
 
 @Controller
+@RequestMapping(value="/core-gateway/api/v1")
 public class DynamicProxyController {
 
+		@Autowired
+		GatewayInfoRepository gatewayInfoRepos;
+	
 		@RequestMapping(value="/proxy/host",method=RequestMethod.POST)
 		@ResponseBody
 		public String dynamicConfigProxy(@RequestBody Map<String,String> originHostIP,HttpServletRequest req) {
@@ -41,10 +49,23 @@ public class DynamicProxyController {
 			return "success";
 		}
 		
+		@RequestMapping(value="/gateway",method=RequestMethod.GET)
+		@ResponseBody
+		public List<GatewayInfo> findAll() {
+			return gatewayInfoRepos.findAll();
+		}
+		
 		@RequestMapping(value="/gateway",method=RequestMethod.POST)
 		@ResponseBody
 		public String save(@RequestBody GatewayInfo gatewayInfo) {
-			
+			gatewayInfoRepos.save(gatewayInfo);
+			return "success";
+		}
+		
+		@RequestMapping(value="/gateway/{id}",method=RequestMethod.DELETE)
+		@ResponseBody
+		public String delete(@PathVariable String id) {
+			gatewayInfoRepos.delete(id);
 			return "success";
 		}
 	

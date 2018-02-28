@@ -65,6 +65,9 @@ or you can  pull the whole project to your Eclipse IDE(Recommend STS IDE).
 1.  Device,Device Service,Device Profile CRUD.
 2.  Gateway(multi-instances)management sharing one web UI.
 3.  user login auth.
+4.  gateway instance CRUD with h2-database(a memory DB,will be placed with persistence DB further.)
+5.  force user to choose one gateway instance before operating other function module.
+
 ## the further 
 
 1.  Will be supported to run in docker

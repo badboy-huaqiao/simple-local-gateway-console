@@ -16,9 +16,9 @@
  *******************************************************************************/
 
 $(document).ready(function(){
-	//global ajax setting to redirect to login when session timeout (but use stay in old page) or user logout
-	//don't worry about user bypass it,the back-end has set permission to pass if user logout or session timeout.
-	//it just improve user experience.
+	//global ajax setting to redirect to login when session timeout (but user stay in old page) or user logout
+	//don't worry about user bypassing it,the back-end has set permission to pass if user logout or session timeout.
+	//here just improve user experience.
 	$.ajaxSetup({
 		cache:false,//prevent browser cache result to redirect  failed.
 		statusCode: {
@@ -34,13 +34,14 @@ $(document).ready(function(){
 		success:function(data){
 			var menu = eval(data);
 			menuRender(menu);
+			$(".center").load("/pages/gateway.html");
 		}
 	}); 	
 	
 	//logout control
 	$(".headbar li.logout").on("click",function(){
 		$.ajax({
-			url:'/logout?ran='+Math.random(),
+			url:'/auth/logout?ran='+Math.random(),
 			type:'GET',
 			success:function(){
 				window.location.href='/?ran='+Math.random();
@@ -102,7 +103,11 @@ $(document).ready(function(){
 				$(this).children("div").slideToggle("normal");
 				return;
 			}
-			//if current node is leaf node，load html resource.
+			//if current node is leaf node，load html resource.//
+			if( window.sessionStorage.getItem('selectedGateway') == null ){
+				alert('please select a gateway instance firstly!');
+				return;
+			};
 			$(".center").load($(this).attr("url"));
 		});
 	}
