@@ -37,7 +37,6 @@ public class AuthFilter implements Filter{
 
 	@Override
 	public void init(FilterConfig filterConfig) throws ServletException {
-		// TODO Auto-generated method stub
 	}
 
 	@Override
@@ -51,6 +50,7 @@ public class AuthFilter implements Filter{
 				|| reqPath.endsWith(".js")
 				|| reqPath.endsWith(".html")
 				|| reqPath.equals("/auth/login")
+				|| reqPath.equals("/auth/register")
 				|| reqPath.equals("/loginPage")) {
 				chain.doFilter(request, response);
 				return;
@@ -76,7 +76,6 @@ public class AuthFilter implements Filter{
 
 	@Override
 	public void destroy() {
-		// TODO Auto-generated method stub
 	}
 
 }

@@ -21,29 +21,25 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.RestController;
 
 import edgexfoundry.domain.User;
 
-@Controller
+@RestController
 public class AuthController {
 	
 	@Value(value = "${USER_NAME}")
 	private String userName;
+	
 	@Value("${USER_PWD}")
 	private String userPwd;
 	
 	@RequestMapping(value="/auth/login",method=RequestMethod.POST)
-	@ResponseBody
 	public void login(@RequestBody User user,HttpServletRequest req,HttpServletResponse resp) throws Exception{
-		System.out.println(user.getUserPwd());
-		if(user.getUserName().equals(userName) && user.getUserPwd().equals(userPwd)) {
-			//should use form to login , if not the user's pwd will be in memory,it's not safe.
-			//i will replace this approach of login
+		if(user.getName().equals(userName) && user.getPassword().equals(userPwd)) {
 			req.getSession().setAttribute("user", user);
 		}
 		//resp.sendRedirect("http://localhost:4000");
@@ -51,11 +47,11 @@ public class AuthController {
 	}
 	
 	@RequestMapping(value="/auth/logout",method=RequestMethod.GET)
-	@ResponseBody
 	public void logout(HttpServletRequest req,HttpServletResponse resp) throws Exception{
 		HttpSession session = req.getSession();
 		session.invalidate();
 		//resp.sendRedirect(req.getContextPath()+"/");
 		return ;
 	}
+	
 }
