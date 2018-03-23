@@ -18,8 +18,14 @@ $(document).ready(function(){
 	deviceModule.loadDeviceData();
 	deviceModule.loadServiceSelectData();
 	deviceModule.loadProfileSelectData();
+	document.addEventListener('click',function(event){
+		$("#device_data_json_format").animate({"right": '-400px'}, "fast");
+		$("#device_data_json_format").hide("fast");
+	});
+	document.getElementById("device_data_json_format").addEventListener('click',function(event){
+		event.stopPropagation();
+	});
 });
-//$(window).unload(function(){ alert("device Bye now!"); });
 var deviceModule = {
 		deviceDataCache:[],
 		selectedRow:null,
@@ -54,8 +60,8 @@ var deviceModule = {
 				rowData += "<td>" +  ele.operatingState + "</td>";
 //				rowData += "<td>" +  ele.service.name + "</td>";
 //				rowData += "<td>" +  ele.profile.name + "</td>";
-				rowData += "<td>" +  ele.created + "</td>";
-				rowData += "<td>" +  ele.modified + "</td>";
+				rowData += "<td>" +  dateToString(ele.created) + "</td>";
+				//rowData += "<td>" +  dateToString(ele.modified) + "</td>";
 				rowData += "</tr>";
 				$("#device_list table tbody").append(rowData);
 			});
@@ -141,14 +147,22 @@ var deviceModuleBtnGroup = {
 			$("#device_detail").hide("fast");
 			$("#device_main").show("fast");
 		},
-		deleteDevice:function(){
-			
+		deleteDevice:function(confirm){
+			$('#deleteConfirmDialog').modal('show');
+			if(confirm){
+				$('#deleteConfirmDialog').modal('hide');
+				return;
+			}
 		},
 		detail:function(){
 			if(!deviceModule.selectedRow){
 				alert("please select desired item.");
 				return;
 			}
+
+			$("#device_detail div.panel-body div:first-child").empty();
+			$("#device_detail div.panel-body div:first-child").append('<pre style="height:200px;overflow:auto;">' + JSON.stringify(deviceModule.selectedRow,null,4) + '</pre>')
+			$("#device_detail #command_list table tbody").empty();
 			$("#device_detail input[name='id']").val(deviceModule.selectedRow.id);
 			$("#device_detail input[name='name']").val(deviceModule.selectedRow.name);
 			$("#device_detail input[name='description']").val(deviceModule.selectedRow.description);
@@ -164,24 +178,20 @@ var deviceModuleBtnGroup = {
 					$.each(commands,function(index,ele){
 						var rowData = '<tr>';
 						rowData += '<td>' + ele.name + '</td>';
-						
-						rowData += '<td>' + '<input type="radio" name="commandRadio_'+ele.id+'" checked value="get" style="width:20px">&nbsp;get' 
-										+ '&nbsp<input type="radio" name="commandRadio_'+ele.id+'" value="set"  style="width:20px">&nbsp;set' 
+						rowData += '<td>' + '<input type="radio"  name="commandRadio_'+ele.id+'" checked value="get" style="width:20px;">&nbsp;get' 
+										+ '&nbsp;<input type="radio" name="commandRadio_'+ele.id+'" value="set"  style="width:20px;">&nbsp;set' 
 										+ '</td>';
-						
-						rowData += '<td>' + '<input type="text" name="reading_value'+ele.id+'" disabled style="width:100px;">' + '</td>'
-						
+						rowData += '<td>' + '<input type="text" class="form-control" name="reading_value'+ele.id+'" disabled style="width:200px;display:inline;">' + '</td>'
 						rowData += '<td>';
 						if(ele.put != null) {
-							$.each(ele.put.parameterNames,function(i,el){ 
-								rowData += el + '&nbsp<input type="text" name="' + el + '" style="width:80px;">'
+							$.each(ele.put.parameterNames,function(i,p){ 
+								rowData += p + '&nbsp;<input type="text" class="form-control" name="' + p + ele.id + '" style="width:100px;display:inline;">&nbsp;'
 							});
 						}
 						rowData += '</td>';
 						rowData += '<td>' 
 							+ '<button id=\''+ele.id+'\' type=\'button\' class=\'btn btn-success\'  onclick=\'deviceModuleBtnGroup.sendCommand('+JSON.stringify(ele)+')\'>send</button>' 
 							+ '</td>';
-						
 						rowData += '</tr>';
 						$("#device_detail #command_list table tbody").append(rowData);
 					});
@@ -189,6 +199,21 @@ var deviceModuleBtnGroup = {
 					$("#device_detail").show("fast");
 				}
 			});	
+		},
+		showJsonFormatter:function(event){
+			event.stopPropagation();
+			$("#device_data_json_format").empty();
+			$("#device_data_json_format").append('<pre>' + JSON.stringify(deviceModule.selectedRow,null,3) + '</pre>');
+			$("#device_data_json_format").toggle("fast");
+			$("#device_data_json_format").animate({"right": '0'}, "fast");
+//			if($("#device_data_json_format").is(":hidden")){
+//				$("#device_data_json_format").show();
+//				$("#device_data_json_format").animate({"right": '0'}, "fast");
+//			}else{
+//				$("#device_data_json_format").animate({"right": '-400px'}, "fast");
+//				$("#device_data_json_format").hide();
+//			}
+			
 		},
 		sendCommand: function(command){
 			$('#'+command.id+'').prop('disabled',true);
@@ -198,9 +223,11 @@ var deviceModuleBtnGroup = {
 				cmdUrl = cmdUrl.replace(/http:\/\/[\w(?=.)]+:[0-9]+/g,"/core-command");
 				var paramBody={};
 				$.each(command.put.parameterNames,function(i,param){
-					var p = $('#device_detail #command_list table tbody input[name="'+param+'"]').val();
+					//debugger
+					var p = $('#device_detail #command_list table tbody input[name="' + param + command.id + '"]').val();
 					paramBody[param] = p;
 				});
+				//console.log(JSON.stringify(paramBody))
 				$.ajax({
 					url:cmdUrl,
 					type:'PUT',
@@ -230,7 +257,6 @@ var deviceModuleBtnGroup = {
 						$('#'+command.id+'').prop('disabled',false);
 					}
 				});
-			
 			}
 		},
 }

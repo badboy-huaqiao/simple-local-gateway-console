@@ -18,7 +18,13 @@ $(document).ready(function(){
 	//init to load data.
 	deviceServiceModule.loadDeviceServiceList();
 	deviceServiceModule.loadDeviceProfile();
-	
+	document.addEventListener('click',function(event){
+		//$("#device_service_json_format").animate({"right": '-400px'}, "fast");
+		$("#device_service_json_format").hide('fast');
+	});
+	document.getElementById("device_service_json_format").addEventListener('click',function(event){
+		event.stopPropagation();
+	});
 });
 
 var deviceServiceModule = {
@@ -34,6 +40,13 @@ var deviceServiceModule = {
 						$("#device_service_list > table > tbody").empty();
 						deviceServiceModule.renderDeviceService(data);
 						$("#device_service_list tfoot").hide();
+						deviceServiceModule.selectedRow = Object.assign({},data[0]);
+						var inputs = $("#device_service_list table ").find("input:radio");
+						$.each(inputs,function(index,ele){
+							if($(ele).val() == deviceServiceModule.selectedRow.id){
+								$(ele).prop('checked',true);
+							}
+						});
 					}
 				},
 				error: function(){
@@ -48,7 +61,11 @@ var deviceServiceModule = {
 				rowData += "<td>" + (index + 1) +"</td>";
 				rowData += "<td>" +  element.id.substr(0,8) + "</td>";
 				rowData += "<td>" +  element.name + "</td>";
-				rowData += "<td>" +  element.labels[0] + "</td>";
+				if(element.labels.length == 0){
+					rowData += "<td>No Labels</td>";
+				}else{
+					rowData += "<td>" +  element.labels[0] + "</td>";
+				}
 				
 				if (element.operatingState == "enabled") {
 					rowData += "<td><i style='color:green;' class='fa fa-circle' aria-hidden='true'></i></td>";
@@ -57,9 +74,9 @@ var deviceServiceModule = {
 				}
 				
 				if (element.adminState == "unlocked") {
-					rowData += "<td><i class='fa fa-unlock' aria-hidden='true'></i></td>";
+					rowData += "<td><i class='fa fa-unlock fa-lg' aria-hidden='true'></i></td>";
 				} else {
-					rowData += "<td><i class='fa fa-lock' aria-hidden='true'></i></td>";
+					rowData += "<td><i class='fa fa-lock fa-lg' aria-hidden='true'></i></td>";
 				}
 				rowData += "</tr>";
 				$("#device_service_list > table > tbody").append(rowData);
@@ -107,22 +124,25 @@ var deviceServiceBtnGroup = {
 		},
 		uploadProfile:function(){
 			$(".center div.device_server_shelter").show();
+			
 			var uploadform = $("#add_device_content div.related_profile form");
 			uploadform.submit();
 			var iframe = $("#add_device_content div.related_profile table iframe")[0];
 			iframe.onload = function(event){
-				var document = iframe.contentDocument;
-				var response =  $(document).find('body').html();
+				var iframe_document = iframe.contentDocument;
+				var response =  $(iframe_document).find('body').html();
 				var result = response.match("code");
-				if(result != null || $(document).find('body').find("h1").length != 0){
+				if(result != null || $(iframe_document).find('body').find("h1").length != 0){
 					alert("upload faild");
 					$(".center div.device_server_shelter").hide();
 				} else {
-					alert("upload sucess");
+					//alert("upload sucess");
+					window.setTimeout(function(){$(".center div.device_server_shelter").hide();},1000);
 					uploadform[0].reset();
 					$("#add_device_content div.related_profile table:first button").prop("disabled",true);
 					deviceServiceModule.loadDeviceProfile();
-					$(".center div.device_server_shelter").hide();
+					$(iframe_document).find('body').empty();
+					$("#file_preview").empty();
 				}
 			}
 			
@@ -203,6 +223,16 @@ var deviceServiceBtnGroup = {
 		},
 		refresh:function(){
 			deviceServiceModule.loadDeviceServiceList();
+		},
+		showJsonFormatter:function(event){
+			event.stopPropagation();
+			if(!deviceServiceModule.selectedRow){
+				return;
+			}
+			$("#device_service_json_format").empty();
+			$("#device_service_json_format").append("<pre>" + JSON.stringify(deviceServiceModule.selectedRow,null,3) + "</pre>");
+			$("#device_service_json_format").toggle('fast');
+			//$("#device_service_json_format").animate({"right": '0'}, "fast");
 		}
 }
 

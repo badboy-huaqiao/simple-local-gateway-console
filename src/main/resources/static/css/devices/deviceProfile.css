@@ -28,12 +28,6 @@
     z-index: 5;
 }
 
-#device_profile_shelter {
-	display: none;
-	position:fixed;
-	
-}
-
 #device_profile_btn div:first-child {
 	display: none;
 }
@@ -55,7 +49,7 @@
     border: 1px solid gray;
     z-index: 6;
     display: none;
-    background-color: white;
+    background-color: #f7f7f9;
 }
 
 div#add_profile_dialog button[name='cancel'] {

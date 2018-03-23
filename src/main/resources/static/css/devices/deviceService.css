@@ -16,6 +16,18 @@
  *******************************************************************************/
 @charset "UTF-8";
 
+div.info_header {
+	position: relative;
+	height: 20px;
+	margin: 25px 0 10px;
+	border-bottom: 2.5px solid rgba(51,153,51,0.6);
+}
+div.info_header span {
+	font-size: 15px;
+	font-weight: bold;
+	color: #339933;
+}
+
 #device_service_btn {
 	margin-bottom: 10px;
 }
@@ -41,11 +53,11 @@
 	width: 200px;
 }
 
-.new_device_msg, .new_device_addressable, .related_service , .related_profile {
+/* .new_device_msg, .new_device_addressable, .related_service , .related_profile {
 	padding: 5px;
 	border: 1px solid gray;
 	margin-bottom: 10px;
-}
+} */
 
 .new_device_msg table , 
 .new_device_addressable table ,
@@ -57,17 +69,17 @@
 .new_device_msg table td, 
 .new_device_addressable table td,
 .related_profile table td {
-	padding: 10px;
+	padding: 5px;
 	text-align: center;
 }
 
-.btn_group {
+/* .btn_group {
 	text-align: center;
 }
 
 .btn_group button:first-child {
 	margin-right: 150px;
-}
+} */
 
 .device_server_shelter {
 	position: fixed;
@@ -103,4 +115,39 @@
 div.related_profile label:hover  {
 	border-bottom: 2px solid;
 	border-bottom-color:#339933; 
+}
+#device_service_list table th,div#device_service_list table tr {
+	text-align: center;
+}
+
+#device_service_list span:hover {
+	box-shadow: 3px 3px 3px #339933;
+}
+
+#device_service_json_format {
+	position: fixed;
+	width: 400px;
+	top: 60px;
+	right: 0;
+	bottom: 0;
+	z-index: 2;
+	display: none;
+	overflow: scroll;
+	padding: 0;
+	/* border: 2px solid red; */
+}
+
+#device_service_json_format > pre {
+	background-color: rgba(51,153,51,0.45);
+	color: white;
+	font-weight: bolder;
+	/* height: 100%; */
+	/* border: 1px solid green; */
+	position: absolute;
+	top: 0;
+	bottom: 0;
+	left:0;
+	right:0;
+	font-size: medium;
+	margin: 0;
 }

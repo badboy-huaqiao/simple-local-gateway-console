@@ -28,10 +28,6 @@
 	float:left;
 }
 
-.divide_line{
-	border-bottom: 1px solid gray;
-	clear: both;
-}
 
 #device_advanced_search table td{
 	padding: 10px;
@@ -49,7 +45,6 @@
 }
 
 #device_list table th{
-	
 	overflow: auto;
 }
 
@@ -63,21 +58,46 @@ th, td {
 }
 
 #device_detail #device_basic_intro {
-	
-	margin-top: 10px;
-	margin-left: 200px;
-	
+	margin-top: 5px;
+	/* margin-left: 200px; */
 }
  
 #device_detail #device_basic_intro td{
-	
-	text-align: right;
-	padding: 8px;
+	text-align: center;
+	padding: 5px;
 } 
 
 #device_detail #device_basic_intro input{
 	width:200px;
-	border: none;
-	border-style:none;
-	outline-style: none;	
+}
+
+.panel{
+	background-color: #f7f7f9;
+	overflow: auto;
+}
+#command_list{
+	overflow: auto;
+}
+#device_basic_intro span:hover{
+	box-shadow: 3px 3px 3px #339933;
+}
+div#device_data_json_format{
+	position: fixed;
+	top: 60px;
+	bottom: 0;
+	right: -400px;
+	z-index: 2;
+	display: none;
+	width: 400px;
+	overflow: auto;
+	/* background-color: rgba(51,153,51,0.6); */
+	
+}
+div#device_data_json_format pre{
+	background-color: rgba(51,153,51,0.45);
+	font-weight: bolder;
+	color:white;
+	position: absolute;
+	top: 0;
+	bottom: 0;
 }

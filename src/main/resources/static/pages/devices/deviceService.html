@@ -23,11 +23,13 @@
 <link href="/css/devices/deviceService.css" rel="stylesheet">
 </head>
 <body>
+	<div id="device_service_json_format"> 		
+	</div>
 	<div class="device_server_shelter">
 		<div class="shelter"></div>
 		<div>
 			<i class="fa fa-spinner fa-pulse fa-3x fa-fw "></i>
-			<span >uploading...</span>
+			<span >Uploading...</span>
 		</div>
 	</div>
 	<div id="device_service_list">
@@ -35,12 +37,13 @@
 			<div class="alert alert-warning" role="alert">please select one
 				service.</div>
 			<button type="button" class="btn btn-success" onclick="deviceServiceBtnGroup.addNewDevice();">
-				<i class="fa fa-plus" aria-hidden="true"></i>&nbsp;device
+				<i class="fa fa-plus" aria-hidden="true"></i>&nbsp;Device
 			</button>
 			<button type="button" class="btn btn-success" onclick="deviceServiceBtnGroup.refresh();" >
-				<i class="fa fa-refresh" aria-hidden="true"></i>&nbsp;refresh
+				<i class="fa fa-refresh" aria-hidden="true"></i>&nbsp;Refresh
 			</button>
-	
+			<span style="color: #339933;font-size: medium;font-weight: bolder;" 
+				onclick="deviceServiceBtnGroup.showJsonFormatter(event)">json show <i class="fa  fa-hand-o-right fa-lg"></i></span>
 		</div>
 		<table class="table table-striped ">
 			<thead>
@@ -49,39 +52,78 @@
 					<th>#</th>
 					<th>ID</th>
 					<th>Service Name</th>
-					<th>label</th>
+					<th>Label</th>
 					<th>OperateState</th>
-					<th>adminState</th>
+					<th>AdminState</th>
 				</tr>
 			</thead>
 			<tbody>
 			</tbody>
 			<tfoot>
 				<tr align="center">
-					<td colspan=8>no data.</td>
+					<td colspan=8>No Data.</td>
 				</tr>
 			</tfoot>
 		</table>
 	</div>
 
 	<div id="add_device_content">
-		<div>
-			<h4>
-				<span class="label label-default">new device related profile</span>
-			</h4>
+		<div class="btn_group">
+			<button type="button" class="btn btn-success" onclick="deviceServiceBtnGroup.back();">
+				<i class="fa fa-arrow-left" aria-hidden="true"></i>&nbsp;Back
+			</button>
+			<button type="button" class="btn btn-success" onclick="deviceServiceBtnGroup.submit();">
+				<i class="fa fa-check" aria-hidden="true"></i>&nbsp;Submit
+			</button>
+		</div>
+	
+		<div class="info_header">
+			<span>New Device General Info</span><div></div>
+		</div>
+		<div class="new_device_msg">
+			<table>
+				<tbody>
+					<tr>
+						<td>Name</td>
+						<td><input type="text" class="form-control" name="device_name" placeholder="required and unique" required="required"></td>
+						<td>Description</td>
+						<td><input type="text" class="form-control" name="device_desc"></td>
+					</tr>
+					<tr>
+						<td>AdminState</td>
+						<td>
+							<select class="form-control" name="device_adminState">
+								<option>UNLOCKED</option>
+								<option>LOCKED</option>
+							</select>
+						</td>
+						<td>OperatingState</td>
+						<td>
+							<select class="form-control" name="device_operatingState">
+								<option>ENABLED</option>
+								<option>DISABLED</option>
+							</select>
+						</td>
+					</tr>
+				</tbody>
+			</table>
+		</div>
+	
+		<div class="info_header">
+			<span>New Device Related Profile</span><div></div>
 		</div>
 		<div class="related_profile">
 			<table>
 				<tr>
-					<td>deviceProfile</td>
+					<td>DeviceProfile</td>
 					<td colspan=2>
-						<select name="device_profile_name">
-							<option value="">please select</option>
+						<select class="form-control" name="device_profile_name">
+							<option value="">Please Select</option>
 						</select>
 					</td>
 				</tr>
 				<tr>
-					<td><label for="profile_file"><span style="color: #339933;opacity: 0.5;">no desired ? upload one.</span></label></td>
+					<td><label for="profile_file"><span style="color: #339933;opacity: 0.5;">No desired ? Click upload.</span></label></td>
 					<td id="file_preview">
 						
 					</td>
@@ -92,7 +134,7 @@
 						</form>
 						<iframe style="display: none;" name="uploadiframe">	</iframe>
 						<button disabled type="button" class="btn btn-default" onclick="deviceServiceBtnGroup.uploadProfile()" style="height:30px;" >
-							<i class="fa fa-upload" aria-hidden="true"></i>&nbsp;upload
+							<i class="fa fa-upload" aria-hidden="true"></i>&nbsp;Upload
 						</button>
 					</td>
 				</tr>
@@ -100,60 +142,31 @@
 		</div>
 		<div>
 			<h4>
-				<span class="label label-default">new device info</span>
+				<span class="label label-default"></span>
 			</h4>
 		</div>
-		<div class="new_device_msg">
-			<table>
-				<tbody>
-					<tr>
-						<td>name</td>
-						<td><input type="text"  name="device_name" placeholder="required and unique" required="required"></td>
-						<td>description</td>
-						<td><input type="text" name="device_desc"></td>
-					</tr>
-					<tr>
-						<td>adminState</td>
-						<td>
-							<select name="device_adminState">
-								<option>unlocked</option>
-								<option>locked</option>
-							</select>
-						</td>
-						<td>operatingState</td>
-						<td>
-							<select name="device_operatingState">
-								<option>enabled</option>
-								<option>disabled</option>
-							</select>
-						</td>
-					</tr>
-				</tbody>
-			</table>
-		</div>
-		<div>
-			<h4>
-				<span class="label label-default">new device addressable</span>
-			</h4>
+		
+		<div class="info_header">
+			<span>New Device Addressable</span><div></div>
 		</div>
 		<div class="new_device_addressable">
 			<form>
 				<table >
 					<tr>
-						<td>name</td>
-						<td><input type="text" name="name" placeholder="unique and required" required></td>
-						<td>method</td>
+						<td>Name</td>
+						<td><input type="text" class="form-control" name="name" placeholder="unique and required" required></td>
+						<td>Method</td>
 						<td>
-							<select name="method">
+							<select class="form-control" name="method">
 								<option value="POST">POST</option>
 								<option value="GET">GET</option>
 							</select>
 						</td>
 					</tr>
 					<tr>
-						<td>protocol</td>
+						<td>Protocol</td>
 						<td>
-							<select name="protocol">
+							<select class="form-control" name="protocol">
 								<option value="HTTP">HTTP</option>
 								<option value="TCP">TCP</option>
 								<option value="MAC">MAC</option>
@@ -161,47 +174,39 @@
 								<option value="OTHER">OTHER</option>
 							</select>
 						</td>
-						<td>address</td>
-						<td><input type="text" name="address"></td>
+						<td>Address</td>
+						<td><input type="text" class="form-control" name="address"></td>
 					</tr>
 					<tr>
-						<td>port</td>
-						<td><input type="text" name="port" ></td>
-						<td>path</td>
-						<td><input type="text" name="path" placeholder="for callback e.g /api/callback"></td>
+						<td>Port</td>
+						<td><input type="text" class="form-control" name="port" ></td>
+						<td>Path</td>
+						<td><input type="text" class="form-control" name="path" placeholder="for callback e.g /api/callback"></td>
 					</tr>
 					<tr>
-						<td>publisher</td>
-						<td><input type="text" name="publisher"></td>
-						<td>user</td>
-						<td><input type="text" name="user"></td>
+						<td>Publisher</td>
+						<td><input type="text" class="form-control" name="publisher"></td>
+						<td>User</td>
+						<td><input type="text" class="form-control" name="user"></td>
 					</tr>
 					<tr>
-						<td>password</td>
-						<td><input type="text" name="password"></td>
-						<td>topic</td>
-						<td><input type="text" name="topic"></td>
+						<td>Password</td>
+						<td><input type="text" class="form-control" name="password"></td>
+						<td>Topic</td>
+						<td><input type="text" class="form-control" name="topic"></td>
 					</tr>
 				</table>
 			</form>
 		</div>
-		<div>
-			<h4>
-				<span class="label label-default">new device related service</span>
-			</h4>
+		
+		<div class="info_header">
+			<span>New Device Related Service</span><div></div>
 		</div>
 		<div class="related_service">
-			deviceService
-			<input type="text" name="device_service_name" disabled>
+			DeviceService
+			<input type="text" style="display:inline;" class="form-control" name="device_service_name" disabled>
 		</div>
-		<div class="btn_group">
-			<button type="button" class="btn btn-success" onclick="deviceServiceBtnGroup.back();">
-				<i class="fa fa-arrow-left" aria-hidden="true"></i>&nbsp;back
-			</button>
-			<button type="button" class="btn btn-success" onclick="deviceServiceBtnGroup.submit();">
-				<i class="fa fa-check" aria-hidden="true"></i>&nbsp;submit
-			</button>
-		</div>
+		
 	</div>
 </body>
 <script type="text/javascript" src="/js/pages/devices/deviceService.js"></script>
