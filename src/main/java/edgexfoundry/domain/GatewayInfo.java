@@ -16,21 +16,21 @@ import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 @Entity
 @SuppressWarnings("serial")
 @EntityListeners(AuditingEntityListener.class)
-public class GatewayInfo implements Serializable{
+public class GatewayInfo implements Serializable {
 	
 	@Id
 	@GenericGenerator(name="idGenerator",strategy="uuid")
 	@GeneratedValue(generator="idGenerator",strategy=GenerationType.AUTO)
-	String id;
-	String name;
-	String description;
-	String address;
+	private String id;
+	private String name;
+	private String description;
+	private String address;
 	
 	@CreatedDate
-	long created;
+	private long created;
 	
 	@LastModifiedDate
-	long modified;
+	private long modified;
 	
 	public String getId() {
 		return id;

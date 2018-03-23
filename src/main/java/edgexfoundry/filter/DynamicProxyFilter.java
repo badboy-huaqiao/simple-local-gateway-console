@@ -77,6 +77,7 @@ public class DynamicProxyFilter extends ZuulFilter {
 
 	@Override
 	public int filterOrder() {
+		//if too high , it will result to AuthFilter doChain() can not find  originHostURL .
 		return 10;
 	}
 
