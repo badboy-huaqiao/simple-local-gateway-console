@@ -35,6 +35,7 @@ var gatewayManagementModule = {
 				gatewayManagementModule.renderGatewayList(data);
 				if(window.sessionStorage.getItem('selectedGateway') != null ){
 					var selectedGateway = JSON.parse(window.sessionStorage.getItem('selectedGateway'));
+					gatewayManagementModule.selectedRow = selectedGateway;
 					var inputs = $("#gateway_list > table > tbody").find("input:radio");
 					$.each(inputs,function(index,ele){
 						if($(ele).prop('value') == selectedGateway.id ){
@@ -80,7 +81,7 @@ var gatewayManagementModule = {
 				contentType:'application/json',
 				data:JSON.stringify(param),
 				success:function(data){
-					alert("Already change gateway to " + gatewayManagementModule.selectedRow.name);
+					//alert("Already change gateway to " + gatewayManagementModule.selectedRow.name);
 				}
 			});
 		});
@@ -117,7 +118,7 @@ var gatewayManagementModuleBtnGroup = {
 			url:'/core-gateway/api/v1/gateway',
 			type:'POST',
 			data:JSON.stringify(gateway_new),
-			contentType:'application/json;charset=utf-8',
+			contentType:'application/json',
 			success:function(){
 				gatewayManagementModuleBtnGroup.back();
 			}

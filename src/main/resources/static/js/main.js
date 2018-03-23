@@ -16,6 +16,7 @@
  *******************************************************************************/
 
 $(document).ready(function(){
+	
 	//global ajax setting to redirect to login when session timeout (but user stay in old page) or user logout
 	//don't worry about user bypassing it,the back-end has set permission to pass if user logout or session timeout.
 	//here just improve user experience.
@@ -35,6 +36,7 @@ $(document).ready(function(){
 			var menu = eval(data);
 			menuRender(menu);
 			$(".center").load("/pages/gateway.html");
+			$(".sidebar li[url='/pages/gateway.html']").css({color:'#339933',borderBottom: '2px solid',borderBottomColor:'#339933'});
 		}
 	}); 	
 	
@@ -103,11 +105,14 @@ $(document).ready(function(){
 				$(this).children("div").slideToggle("normal");
 				return;
 			}
-			//if current node is leaf node，load html resource.//
+			//if current node is leaf node，load html resource.
+			//if no select one gateway instance,not load other resource.
 			if( window.sessionStorage.getItem('selectedGateway') == null ){
-				alert('please select a gateway instance firstly!');
+				//alert('please select a gateway instance firstly!');
 				return;
 			};
+			$(".sidebar li").not($(this)).css({color:'',borderBottom: '',borderBottomColor:''});
+			$(this).css({color:'#339933',borderBottom: '2px solid',borderBottomColor:'#339933'});
 			$(".center").load($(this).attr("url"));
 		});
 	}

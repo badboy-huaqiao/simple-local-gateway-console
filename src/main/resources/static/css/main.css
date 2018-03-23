@@ -40,7 +40,7 @@
 	right: -400px;
 	top: 60px;
 	bottom: 0;
-	z-index: 3;
+	z-index: 999;
 	background-color:white;
 	/* opacity:0.3; */
 	border-left: 1px solid #339933;
@@ -118,8 +118,8 @@
 }
 
 .sidebar div > ul > li > span:hover {
-	border-bottom: 2px solid;
-	border-bottom-color:#339933; 
+	border: 2px solid;
+	border-color:#339933; 
 }
 
 /* .sidebar div > ul > li::before {
@@ -128,17 +128,21 @@
 } */
 
 .center {
-	position: absolute;
-	max-width: 100%; 
-	height: auto;
-	left: 200px;
-	top: 60px;
-	padding: 0;
-	right: 0;
+	/* position: absolute; */
+	/* left: 200px;
+	top: 60px; */
+	/* right: 0;
+	bottom: 0; */
+	
+	margin-top:60px;
+	margin-left:200px;
+	margin-bottom:0;
 	padding: 0 10px;
 	padding-top: 10px;
 	z-index: 0;
+	max-width: 100%; 
+	height: auto;
 	overflow: visible;
 	overflow-x: hidden;
-	/* border: 1px solid red; *//* debugger */
+	/* border: 1px solid red; */ /* debugger */
 }

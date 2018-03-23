@@ -16,30 +16,62 @@
  *******************************************************************************/
 package edgexfoundry.domain;
 
-import java.util.UUID;
+import javax.persistence.Id;
 
+import org.springframework.data.annotation.CreatedDate;
+import org.springframework.data.annotation.LastModifiedDate;
+
+@SuppressWarnings("serial")
 public class User {
 
-	private String userId = UUID.randomUUID().toString();
-	private String userName;
-	private String userPwd;
-	public String getUserId() {
-		return userId;
+	@Id
+	private String id;
+	
+	@CreatedDate
+	private long created;
+	
+	@LastModifiedDate
+	private long modified;
+	
+	private String name;
+	private String password;
+	
+	public String getName() {
+		return name;
 	}
-	public void setUserId(String userId) {
-		this.userId = userId;
+	public void setName(String name) {
+		this.name = name;
 	}
-	public String getUserName() {
-		return userName;
+	public String getPassword() {
+		return password;
 	}
-	public void setUserName(String userName) {
-		this.userName = userName;
-	}
-	public String getUserPwd() {
-		return userPwd;
-	}
-	public void setUserPwd(String userPwd) {
-		this.userPwd = userPwd;
+	public void setPassword(String password) {
+		this.password = password;
 	}
 	
+	
+	public String getId() {
+		return id;
+	}
+	public void setId(String id) {
+		this.id = id;
+	}
+	public long getCreated() {
+		return created;
+	}
+	public void setCreated(long created) {
+		this.created = created;
+	}
+	public long getModified() {
+		return modified;
+	}
+	public void setModified(long modified) {
+		this.modified = modified;
+	}
+	@Override
+	public String toString() {
+		return "User [ id=" //+ super.getId()
+				+ ", name=" + name 
+				+ " ]";
+	}
 }

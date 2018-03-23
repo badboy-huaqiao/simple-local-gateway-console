@@ -31,7 +31,7 @@
 	}
 	div.home_back {
 		background-color: #339933;
-		opacity: 0.15;
+		opacity: 0.2;
 		position: fixed;
 		top: 0;
 		bottom: 0;
@@ -43,6 +43,21 @@
 		position: fixed;
 		top: 300px;
 		right: 400px;
+	}
+	div.web_logo {
+		position: fixed;
+		top: 360px;
+		left: 100px;
+	}
+	
+	div.web_logo span {
+		font-weight: 600;
+		font-size: xx-large;
+		font-stretch: wider;
+		color: white;
+		opacity: 0.8;
+		font-style: oblique;
+		/* font-variant: small-caps; */
 	}
 	
 	button{
@@ -56,7 +71,7 @@
 		top: 288px;
 		padding: 10px;
 		background-color: #339933;
-		opacity: 0.2;
+		opacity: 0.35;
 	}
 </style>
 </head>
@@ -64,6 +79,9 @@
 	<div class="home_back">
 	</div>
 	<div class="login_background">
+	</div>
+	<div class="web_logo">
+		<span>EdgeX&nbsp;&nbsp;Foundry&nbsp;&nbsp;Console</span>
 	</div>
 	<div class="login_form">
 		<form class="form-horizontal">
@@ -106,9 +124,21 @@
 			url:'/auth/login',
 			type:'POST',
 			contentType:'application/json',
-			data:JSON.stringify({'userName':name,'userPwd':pwd}),
+			data:JSON.stringify({'name':name,'password':pwd}),
 			success:function(data){
 				window.location.href='/?ran=' + Math.random();
+				var selectedGateway = JSON.parse(window.sessionStorage.getItem('selectedGateway'))
+				var addr = {"hostIP":selectedGateway.address};
+				$.ajax({
+					url: '/core-gateway/api/v1/proxy/host',
+					type: 'POST',
+					contentType:'application/json',
+					data:JSON.stringify(addr),
+					success:function(data){
+						//alert("Already change gateway to " + gatewayManagementModule.selectedRow.name);
+					}
+				});
+				
 			}
 		});
 		

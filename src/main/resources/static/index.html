@@ -20,7 +20,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Local Gateway console</title>
+<title>EdgeX Foundry Console</title>
 <link href="/webjars/bootstrap/css/bootstrap.min.css" rel="stylesheet">
 <link href="/webjars/fontawesome/css/font-awesome.min.css" rel="stylesheet" >
 <link href="/css/main.css" rel="stylesheet">
@@ -30,7 +30,22 @@
 	     -moz-box-sizing: border-box;
 	          box-sizing: border-box;
 	}
+	body {
+		background-color: #f7f7f9;
+		min-width: 1000px;
+	}
 </style>
+<script type="text/javascript">
+	(function(){
+		window.history.pushState(null, null, "/");
+	})();
+	//防止页面后退
+    history.pushState(null, null, document.URL);
+    window.addEventListener('popstate', function () {
+        history.pushState(null, null, document.URL);
+    });
+
+</script>
 </head>
 <body>
 	<div class="shelter_layer"></div>
@@ -40,7 +55,7 @@
 	<!-- head bar begin. -->
 	<div class="headbar">
 		<ul>
-			<li class="title">Local Gateway Console <span class="version">0.1.0</span></li>
+			<li class="title">EdgeX Foundry Console <span class="version">0.1.0</span></li>
 			<li class="logout"><i class="fa fa-power-off fa-lg" aria-hidden="true"></i></li>
 			<li class="notification"><i class="fa fa-bell-o fa-lg" aria-hidden="true"></i></li>
 			<li class="user"><i class="fa fa-user-circle-o fa-lg" aria-hidden="true"></i></li>
@@ -62,7 +77,6 @@
 							<li>sub menu</li>
 						</ul>
 					</div>
-					
 				</li>
 				<li><i class="fa fa-camera"></i>Multimedia</li>
 				<li><i class="fa fa-share"></i>Export</li>
@@ -73,12 +87,14 @@
 	
 	<!-- footer begin. -->
 	<div class="footer"></div>
+	<div>
+		
+	</div>
 </body>
 <script src="/webjars/jquery/jquery.min.js"></script>
 <script src="/webjars/bootstrap/js/bootstrap.min.js"></script>
+<script src="/vendors/echarts/echarts.min.js"  charset="UTF-8"></script>
+<script src="/vendors/echarts/theme/wonderland.js" charset="UTF-8"></script>
 <script src="/js/common.js"></script>
 <script src="/js/main.js"></script>
-<script type="text/javascript">
-	
-</script>
 </html>
