@@ -25,6 +25,12 @@ $(document).ready(function(){
 	document.getElementById("device_data_json_format").addEventListener('click',function(event){
 		event.stopPropagation();
 	});
+	var shakee = function(){
+		$("#device_basic_intro  i").animate({"right":"0"},function(){
+			$("#device_basic_intro  i").animate({"right":"10px"},shakee());
+		});
+	}
+	shakee();
 });
 var deviceModule = {
 		deviceDataCache:[],

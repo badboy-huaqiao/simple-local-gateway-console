@@ -42,7 +42,7 @@ $(document).ready(function(){
 		$("#action_device_list table").toggle();
 		$("#condition_device_list table").hide();
 	});
-	
+	//init load data.
 	ruleEngineModule.loadRuleEngineData();
 	$.ajax({
 		url:'/core-metadata/api/v1/device',
@@ -67,7 +67,7 @@ $(document).ready(function(){
 					$.each(ruleEngineModule.deviceDataCache,function(i,d){
 						if(d.id == $(radio).val()) {
 							//$("#condition_device_list input").val();
-							$("#select_panle input[name='condition_device_name']").val(d.name);
+							$("#condition_device_list div.select_panle input[name='condition_device_name']").val(d.name);
 							$("select[name='parameter']").empty();
 							$.each(d.profile.deviceResources,function(j,resource){
 								var opts = "<option>" + resource.name + "</option>";
@@ -83,7 +83,7 @@ $(document).ready(function(){
 					var radio = this;
 					$.each(ruleEngineModule.deviceDataCache,function(i,d){
 						if(d.id == $(radio).val()) {
-							$("#select_panle input[name='action_device_name']").val(d.name);
+							$("#action_device_list div.select_panle input[name='action_device_name']").val(d.name);
 							$(".action_device_list select[name='commandName']").empty();
 							$.each(d.profile.commands,function(j,cmd){
 								var opts = "<option value='"+cmd.id+"'>" + cmd.name + "</option>";

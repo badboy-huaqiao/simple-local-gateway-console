@@ -25,6 +25,13 @@ $(document).ready(function(){
 	document.getElementById("device_service_json_format").addEventListener('click',function(event){
 		event.stopPropagation();
 	});
+	
+	var shakee = function(){
+		$("#device_service_list  i").animate({"right":"0"},function(){
+			$("#device_service_list  i").animate({"right":"10px"},shakee());
+		});
+	}
+	shakee();
 });
 
 var deviceServiceModule = {

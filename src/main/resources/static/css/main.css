@@ -53,7 +53,7 @@
 	top:0;
 	left:0;
 	right:0;
-	z-index: 1;
+	z-index: 990;
 	/* border: 1px solid red; *//* debugger */
 }
 
@@ -103,7 +103,7 @@
 	bottom: 0;
 	left: 0;
 	border-right: 2px solid #339933;
-	z-index: 1;
+	z-index: 990;
 	/* border: 1px solid red; *//* debugger */
 }
 

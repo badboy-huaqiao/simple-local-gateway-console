@@ -34,7 +34,7 @@
 	<div id="export_list">
 		<div>
 			<button type="button" class="btn btn-success"
-				onclick="coreExportBtnGroup.deleteExport();">
+				onclick="coreExportBtnGroup.deleteExport(false);">
 				<i class="fa fa-minus" aria-hidden="true"></i>&nbsp;Delete
 			</button>
 			<button type="button" class="btn btn-success"
@@ -97,7 +97,7 @@
 			<i class="fa fa-check" aria-hidden="true"></i>&nbsp;Update
 		</button>
 		&nbsp;<span style="color: #339933;font-size: medium;font-weight: bolder;" 
-							onclick="coreExportBtnGroup.showJsonFormatter(event)">json show <i class="fa  fa-hand-o-right fa-lg"></i></span>
+							onclick="coreExportBtnGroup.showJsonFormatter(event)">json show &nbsp;&nbsp;<i style="position: relative;" class="fa  fa-hand-o-left fa-lg"></i></span>
 		<form id="export_data_form">
 			<div class="info_header">
 				<span>General</span>
@@ -206,12 +206,56 @@
 			<div>
 				<table>
 					<tr>
-						<td>Value Descriptor Name</td>
-						<td><input type="text" name="valueDescriptor"
-							class="form-control" placeholder=""></td>
 						<td>Device Name</td>
-						<td><input type="text" name="deviceName" class="form-control"
-							placeholder=""></td>
+						<td>
+							<div id="device_filter_list">
+								<div class="select_panle">
+									<div class="input-group">
+								      <div class="input-group-btn">
+								        <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><span class="caret"></span></button>
+								      </div>
+								      <input type="text" name="deviceName" class="form-control" disabled placeholder="">
+								    </div>
+						  		</div>
+								<table class="table table-striped">
+									<thead>
+										<tr>
+											<th></th>
+											<th>#</th>
+											<th>Name</th>
+											<th>Description</th>
+										</tr>
+									</thead>
+									<tbody>
+									</tbody>
+								</table>
+							</div>
+						</td>
+						<td>Value Descriptor Name</td>
+						<td>
+							<div id="value_desc_filter_list">
+								<div class="select_panle">
+									<div class="input-group">
+								      <div class="input-group-btn">
+								        <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><span class="caret"></span></button>
+								      </div>
+								      <input type="text" name="valueDescriptor" class="form-control" disabled placeholder="">
+								    </div>
+						  		</div>
+								<table class="table table-striped">
+									<thead>
+										<tr>
+											<th></th>
+											<th>#</th>
+											<th>Name</th>
+											<th>Descriptor</th>
+										</tr>
+									</thead>
+									<tbody>
+									</tbody>
+								</table>
+							</div>
+						</td>
 					</tr>
 				</table>
 			</div>

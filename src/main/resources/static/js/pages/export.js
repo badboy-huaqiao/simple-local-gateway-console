@@ -76,9 +76,127 @@ $(document).ready(function(){
     document.addEventListener('click',function(event){
     		event.stopPropagation();
     });
+    var shakee = function(){
+		$("#add_new_export  i").animate({"right":"0"},function(){
+			$("#add_new_export  i").animate({"right":"10px"},shakee());
+		});
+	}
+	shakee();
+	document.addEventListener('click',function(event){
+		$("#device_filter_list table").hide();
+		$("#value_desc_filter_list table").hide();
+	});
+	document.querySelector("#device_filter_list table").addEventListener('click',function(event){
+		event.stopPropagation();
+	});
+	document.querySelector("#value_desc_filter_list table").addEventListener('click',function(event){
+		event.stopPropagation();
+	});
+	
+	$("#device_filter_list .select_panle").on('click',function(event){
+		event.stopPropagation();
+		$("#device_filter_list table").toggle();
+		$("#value_desc_filter_list table").hide();
+	});
+	
+	$("#value_desc_filter_list .select_panle").on('click',function(event){
+		event.stopPropagation();
+		$("#value_desc_filter_list table").toggle();
+		$("#device_filter_list table").hide();
+	});
+	
+	$.ajax({
+		url:'/core-metadata/api/v1/device',
+		type:'GET',
+		success:function(data){
+			coreExportModule.deviceFilterListCache = data;
+			$("#device_filter_list table > tbody").empty();
+			$("#value_desc_filter_list table > tbody").empty();
+			$.each(data,function(i,d){
+				var rowData = "<tr>";
+				rowData += "<td><input type='checkbox'  name='deviceFilterCheck' value= '" + d.id + "'></td>";
+				rowData += "<td>" + (i+1) + "</td>";
+				rowData += "<td>" + d.name + "</td>";
+				rowData += "<td>" + d.description + "</td>";
+				rowData += "</tr>";
+				$("#device_filter_list table > tbody").append(rowData);
+			});
+			
+			$("#device_filter_list table > tbody input:checkbox").on('click',function(){
+				if($(this).prop('checked')){
+					var checkbox = this;
+					$.each(coreExportModule.deviceFilterListCache,function(i,d){
+						if(d.id == $(checkbox).val()) {
+							coreExportModule.deviceFilterSelected.push(d.name);
+							$("#device_filter_list .select_panle input[name='deviceName']").val(coreExportModule.deviceFilterSelected.toString());
+						}
+					});
+				}else{
+					coreExportModule.deviceFilterSelected.splice(coreExportModule.deviceFilterSelected.indexOf($(this).val()),1);
+					$("#device_filter_list .select_panle input[name='deviceName']").val(coreExportModule.deviceFilterSelected.toString());
+				}
+				$("#value_desc_filter_list table > tbody").empty();
+				if(coreExportModule.deviceReadingValueSelected.length != 0 ){
+					$.each(coreExportModule.deviceReadingValueSelected,function(i,name){
+						$.each($("#value_desc_filter_list table > tbody input:checkbox"),function(j,c){
+							if(name == $(c).val()){
+								$.each($("#value_desc_filter_list table > tbody input:checkbox"),function(k,cc){
+									if($(cc).val() == name){
+										$(c).prop('checked',true);
+										return false;
+									}
+								});
+							}
+						});
+					});
+				}
+				
+				$.each(coreExportModule.deviceFilterSelected,function(n,selectDevice){
+					$.each(coreExportModule.deviceFilterListCache,function(m,d){
+						if(selectDevice == d.name){
+							$.each(d.profile.deviceResources,function(i,r){
+								var rowData = "<tr>";
+								rowData += "<td><input type='checkbox' name='resourceFilterCheck' value= '" + r.name + "'></td>";
+								rowData += "<td>" + (i+1) + "</td>";
+								rowData += "<td>" + r.name + "</td>";
+								rowData += "<td>" + r.description + "</td>";
+								rowData += "</tr>";
+								$("#value_desc_filter_list table > tbody").append(rowData);
+							});
+						}
+					});
+				});
+				
+				if(coreExportModule.deviceReadingValueSelected.length != 0 ){
+					var inputs = $("#value_desc_filter_list table > tbody input:checkbox");
+					$.each(coreExportModule.deviceReadingValueSelected,function(i,name){
+						$.each(inputs,function(j,input){
+							if($(input).val() == name){
+								$(input).prop("checked",true);
+								return false;
+							}
+						});
+					});
+				}
+				
+				$("#value_desc_filter_list table > tbody input:checkbox").on('click',function(){
+					if($(this).prop('checked')){
+						coreExportModule.deviceReadingValueSelected.push($(this).val());
+						$("#value_desc_filter_list .select_panle input[name='valueDescriptor']").val(coreExportModule.deviceReadingValueSelected.toString());
+					}else{
+						coreExportModule.deviceReadingValueSelected.splice(coreExportModule.deviceReadingValueSelected.indexOf($(this).val()),1);
+						$("#value_desc_filter_list .select_panle input[name='valueDescriptor']").val(coreExportModule.deviceReadingValueSelected.toString());
+					}
+				});
+			});	
+		}
+	});
 });
 
 var coreExportModule = {
+		deviceFilterListCache:[],
+		deviceFilterSelected:[],
+		deviceReadingValueSelected:[],
 		exportChart:{},
 		exportDataCache:[],
 		selectedRow:{},
@@ -220,8 +338,18 @@ var coreExportBtnGroup = {
 		deleteExport:function(confirm){
 			$('#deleteConfirmDialog').modal('show');
 			if(confirm){
-				$('#deleteConfirmDialog').modal('hide');
-				return;
+				$.ajax({
+					url:'/core-export/api/v1/registration/id/' + coreExportModule.selectedRow.id + '',
+					type:'DELETE',
+					success:function(){
+						$('#deleteConfirmDialog').modal('hide');
+						coreExportModule.loadExportData();
+					},
+					error:function(){
+						alert('failed.');
+						$('#deleteConfirmDialog').modal('hide');
+					}
+				});
 			}
 		},
 		detail:function(){
@@ -246,9 +374,54 @@ var coreExportBtnGroup = {
 //			$("#add_new_export input[name='key']").val(coreExportModule.selectedRow.id);
 //			$("#add_new_export input[name='id']").val(coreExportModule.selectedRow.id);
 			if(coreExportModule.selectedRow.filter != null){
-				$("#add_new_export input[name='valueDescriptor']").val(coreExportModule.selectedRow.filter.valueDescriptorIdentifiers[0]);
-				$("#add_new_export input[name='deviceName']").val(coreExportModule.selectedRow.filter.deviceIdentifiers[0]);
+				coreExportModule.deviceFilterSelected = coreExportModule.selectedRow.filter['deviceIdentifiers'];
+				coreExportModule.deviceReadingValueSelected = coreExportModule.selectedRow.filter['valueDescriptorIdentifiers'];
+				$("#device_filter_list .select_panle input[name='deviceName']").val(coreExportModule.deviceFilterSelected.toString());
+				$("#value_desc_filter_list .select_panle input[name='valueDescriptor']").val(coreExportModule.deviceReadingValueSelected.toString());
 			}
+			if(coreExportModule.deviceFilterSelected.length != 0 ){
+				$.each(coreExportModule.deviceFilterSelected,function(i,name){
+					$.each(coreExportModule.deviceFilterListCache,function(j,d){
+						if(name == d.name){
+							$.each($("#device_filter_list table > tbody input:checkbox"),function(k,c){
+								if($(c).val() == d.id){
+									$(c).prop('checked',true);
+									return false;
+								}
+							});
+						}
+					});
+				});
+				$("#value_desc_filter_list table > tbody").empty();
+				$.each(coreExportModule.deviceFilterSelected,function(n,selectDevice){
+					$.each(coreExportModule.deviceFilterListCache,function(m,d){
+						if(selectDevice == d.name){
+							$.each(d.profile.deviceResources,function(i,r){
+								var rowData = "<tr>";
+								rowData += "<td><input type='checkbox' name='resourceFilterCheck' value= '" + r.name + "'></td>";
+								rowData += "<td>" + (i+1) + "</td>";
+								rowData += "<td>" + r.name + "</td>";
+								rowData += "<td>" + r.description + "</td>";
+								rowData += "</tr>";
+								$("#value_desc_filter_list table > tbody").append(rowData);
+							});
+						}
+					});
+				});
+			}
+			
+			if(coreExportModule.deviceReadingValueSelected.length != 0 ){
+				var inputs = $("#value_desc_filter_list table > tbody input:checkbox");
+				$.each(coreExportModule.deviceReadingValueSelected,function(i,name){
+					$.each(inputs,function(j,input){
+						if($(input).val() == name){
+							$(input).prop("checked",true);
+							return false;
+						}
+					});
+				});
+			}
+			
 			$("#add_new_export > button[name='submit']").hide();
 			$("#add_new_export > button[name='update']").show();
 			$("#add_new_export").show();
@@ -261,6 +434,9 @@ var coreExportBtnGroup = {
 			$("#core_export_shelter").show();
 			var exportRegister = {};
 			var exportAddr = {};
+			var exportFilter = {};
+			exportFilter['deviceIdentifiers'] = coreExportModule.deviceFilterSelected;
+			exportFilter['valueDescriptorIdentifiers'] = coreExportModule.deviceReadingValueSelected;
 			//exportRegister['id'] = $("#add_new_export input[name='id']").val();
 			exportRegister['name'] = $("#add_new_export input[name='name']").val();
 			exportRegister['destination'] = $("#add_new_export input[name='destination']").val();
@@ -278,16 +454,6 @@ var coreExportBtnGroup = {
 			exportAddr['topic'] = $("#add_new_export input[name='topic']").val();
 			exportAddr['method'] = "POST";
 			exportAddr['protocol'] = "TCP";
-			
-			var exportFilter = {};
-			exportFilter['deviceIdentifiers'] = [];
-			exportFilter['valueDescriptorIdentifiers'] = [];
-			if($("#add_new_export input[name='deviceName']").val() != ""){
-				exportFilter['deviceIdentifiers'].push($("#add_new_export input[name='deviceName']").val());
-			}
-			if($("#add_new_export input[name='valueDescriptor']").val() != ""){
-				exportFilter['valueDescriptorIdentifiers'].push($("#add_new_export input[name='valueDescriptor']").val());
-			}
 
 			exportRegister['addressable'] = exportAddr;	
 			exportRegister['filter'] = exportFilter;
@@ -310,14 +476,8 @@ var coreExportBtnGroup = {
 			var exportAddr = {};
 			var exportFilter = {};
 			
-			exportFilter['deviceIdentifiers'] = [];
-			exportFilter['valueDescriptorIdentifiers'] = [];
-			if($("#add_new_export input[name='deviceName']").val() != ""){
-				exportFilter['deviceIdentifiers'].push($("#add_new_export input[name='deviceName']").val());
-			}
-			if($("#add_new_export input[name='valueDescriptor']").val() != ""){
-				exportFilter['valueDescriptorIdentifiers'].push($("#add_new_export input[name='valueDescriptor']").val());
-			}
+			exportFilter['deviceIdentifiers'] = coreExportModule.deviceFilterSelected;
+			exportFilter['valueDescriptorIdentifiers'] = coreExportModule.deviceReadingValueSelected;
 			
 			exportRegister['id'] = $("#add_new_export input[name='id']").val();
 			exportRegister['name'] = $("#add_new_export input[name='name']").val();

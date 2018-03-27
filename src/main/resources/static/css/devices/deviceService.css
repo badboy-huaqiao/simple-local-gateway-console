@@ -122,6 +122,7 @@ div.related_profile label:hover  {
 
 #device_service_list span:hover {
 	box-shadow: 3px 3px 3px #339933;
+	width: 80px;
 }
 
 #device_service_json_format {
@@ -151,3 +152,15 @@ div.related_profile label:hover  {
 	font-size: medium;
 	margin: 0;
 }
+
+/* #device_service_list  i {
+	-webkit-animation: move_eye 4s linear 0s infinite alternate;
+     -moz-animation: move_eye 4s linear 0s infinite alternate;
+       -o-animation: move_eye 4s linear 0s infinite alternate;
+          animation: move_eye 4s linear 0s infinite alternate;
+}
+
+@-webkit-keyframes move_eye { from { margin-left:-20%; } to { margin-left:100%; }  }
+   @-moz-keyframes move_eye { from { margin-left:-20%; } to { margin-left:100%; }  }
+     @-o-keyframes move_eye { from { margin-left:-20%; } to { margin-left:100%; }  }
+        @keyframes move_eye { from { margin-left:-20%; } to { margin-left:100%; }  } */
