@@ -40,8 +40,8 @@ public class IncomingDataListener implements MqttCallback {
 	private String brokerHost = "10.112.122.28";
 	private String port = "1883";
 	private String topic = "test-register-01";
-	private String user = "huaqiao";
-	private String password = "2836";
+	private String user = "huaqiao_zhang";
+	private String password = "1234";
 	private String clientId = "incomingDataSubscriber";
 	private int qos = 0;
 	private int keepAlive = 3600; //one hour.

@@ -95,6 +95,7 @@ var deviceProfileModuleBtnGroup = {
 		$('#deleteConfirmDialog').modal('show');
 		if(confirm){
 			$('[data-toggle="popover"]').popover('hide');
+			$('#deleteConfirmDialog').modal('hide');
 			$.each(deviceProfileModule.selectedRow, function(index, ele) {
 				$.ajax({
 					url : '/core-metadata/api/v1/deviceprofile/id/' + ele + '',
@@ -103,7 +104,6 @@ var deviceProfileModuleBtnGroup = {
 						if (index == deviceProfileModule.selectedRow.length - 1) {
 							deviceProfileModule.selectedRow = [];
 							deviceProfileModule.loadProfileList();
-							$('#deleteConfirmDialog').modal('hide');
 						}
 					},
 					error : function() {

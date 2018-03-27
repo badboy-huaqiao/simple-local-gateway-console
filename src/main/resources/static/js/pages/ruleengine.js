@@ -162,15 +162,18 @@ var ruleEngineModuleBtnGroup = {
 			$("#rule-engine-list").hide();
 			$("#rule-add-new").show();
 		},
-		deleteRule:function(){
-			$.ajax({
-				url:'/rule-engine/api/v1/rule/name/'+ruleEngineModule.selectRule+'',
-				type:'DELETE',
-				success:function(){
-					ruleEngineModule.loadRuleEngineData();
-				}
-			});
-			
+		deleteRule:function(confirm){
+			$('#deleteConfirmDialog').modal('show');
+			if(confirm){
+				$('#deleteConfirmDialog').modal('hide');
+				$.ajax({
+					url:'/rule-engine/api/v1/rule/name/'+ruleEngineModule.selectRule+'',
+					type:'DELETE',
+					success:function(){
+						ruleEngineModule.loadRuleEngineData();
+					}
+				});
+			}		
 		},
 		detail:function(){},
 		back:function(){

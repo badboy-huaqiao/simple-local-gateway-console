@@ -19,7 +19,7 @@ $(document).ready(function(){
 	deviceModule.loadServiceSelectData();
 	deviceModule.loadProfileSelectData();
 	document.addEventListener('click',function(event){
-		$("#device_data_json_format").animate({"right": '-400px'}, "fast");
+		//$("#device_data_json_format").animate({"right": '-400px'}, "fast");
 		$("#device_data_json_format").hide("fast");
 	});
 	document.getElementById("device_data_json_format").addEventListener('click',function(event){
@@ -157,7 +157,13 @@ var deviceModuleBtnGroup = {
 			$('#deleteConfirmDialog').modal('show');
 			if(confirm){
 				$('#deleteConfirmDialog').modal('hide');
-				return;
+				$.ajax({
+					url:'/core-metadata/api/v1/device/id/' + deviceModule.selectedRow.id + '',
+					type:'DELETE',
+					success:function(){
+						deviceModule.loadDeviceData();
+					}
+				});
 			}
 		},
 		detail:function(){
@@ -209,9 +215,9 @@ var deviceModuleBtnGroup = {
 		showJsonFormatter:function(event){
 			event.stopPropagation();
 			$("#device_data_json_format").empty();
+			//$("#device_data_json_format").animate({"right": '0'}, "fast");
 			$("#device_data_json_format").append('<pre>' + JSON.stringify(deviceModule.selectedRow,null,3) + '</pre>');
 			$("#device_data_json_format").toggle("fast");
-			$("#device_data_json_format").animate({"right": '0'}, "fast");
 //			if($("#device_data_json_format").is(":hidden")){
 //				$("#device_data_json_format").show();
 //				$("#device_data_json_format").animate({"right": '0'}, "fast");

@@ -190,6 +190,24 @@
 			</tr>
 		</table>
 	</div>
+	<!-- Modal -->
+	<div style="" class="modal" id="deleteConfirmDialog" role="dialog" >
+	  <div class="modal-dialog" role="document">
+	    <div class="modal-content">
+	    	  <div class="modal-header">
+	        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+	        <h4 class="modal-title" id="myModalLabel">Confirm</h4>
+	      </div>
+	      <div class="modal-body">
+	        <span style="font-size: medium;font-weight: bold;color: red;">Are you sure to delete?</span>
+	      </div>
+	      <div class="modal-footer">
+	        <button type="button" class="btn btn-success" data-dismiss="modal">&nbsp;No&nbsp;</button>
+	        <button type="button" class="btn btn-default" value="true" onclick="ruleEngineModuleBtnGroup.deleteRule(true)">Yes</button>
+	      </div>
+	    </div>
+	  </div>
+	</div>
 </body>
 <script src="/js/pages/ruleengine.js"></script>
 </html>

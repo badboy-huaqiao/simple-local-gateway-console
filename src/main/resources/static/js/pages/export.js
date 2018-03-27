@@ -73,9 +73,6 @@ $(document).ready(function(){
     document.addEventListener('click',function(event){
     		$("#export_register_json_format").hide('fast');
     });
-    document.addEventListener('click',function(event){
-    		event.stopPropagation();
-    });
     var shakee = function(){
 		$("#add_new_export  i").animate({"right":"0"},function(){
 			$("#add_new_export  i").animate({"right":"10px"},shakee());
@@ -85,6 +82,7 @@ $(document).ready(function(){
 	document.addEventListener('click',function(event){
 		$("#device_filter_list table").hide();
 		$("#value_desc_filter_list table").hide();
+		$("#export_register_json_format").hide();
 	});
 	document.querySelector("#device_filter_list table").addEventListener('click',function(event){
 		event.stopPropagation();
@@ -92,7 +90,9 @@ $(document).ready(function(){
 	document.querySelector("#value_desc_filter_list table").addEventListener('click',function(event){
 		event.stopPropagation();
 	});
-	
+	document.getElementById("export_register_json_format").addEventListener('click',function(event){
+		event.stopPropagation();
+	});
 	$("#device_filter_list .select_panle").on('click',function(event){
 		event.stopPropagation();
 		$("#device_filter_list table").toggle();
@@ -505,6 +505,10 @@ var coreExportBtnGroup = {
 				data:JSON.stringify(exportRegister),
 				contentType:'application/json',
 				success:function(){
+					var echartOpts = coreExportModule.exportChart.getOption();
+					echartOpts.series[0].data = [0,0,0,0];
+					echartOpts.series[1].data = [0,0,0,0];
+					coreExportModule.exportChart.setOption(echartOpts);
 					window.setTimeout(function(){
 						$("div.core_export_shelter").hide('fast');
 						coreExportModule.loadExportData();
