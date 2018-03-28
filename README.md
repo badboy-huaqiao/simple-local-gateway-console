@@ -62,16 +62,19 @@ or you can  pull the whole project to your Eclipse IDE(Recommend STS IDE).
 
 ## Completed functions
 
-1.  Device,Device Service,Device Profile CRUD.
+1.  the CRUD of Device,Device Service,Device Profile,Export Register,Rule Engine.
 2.  Gateway(multi-instances)management sharing one web UI.
 3.  user login auth.
 4.  gateway instance CRUD with h2-database(a memory DB,will be placed with persistence DB further.)
 5.  force user to choose one gateway instance before operating other function module.
+6.  all data from EdgeX Foundry can be showed in json formatter,which will be used to developer.
 
 ## the further 
 
 1.  Will be supported to run in docker
-2.  Gradually improve other functions
+2.  Google Map Location to manage multi-gateway instance.
+3.  camera device Living Stream Rendering on web console.
+4.  Gradually improve other functions
 
 
 
