@@ -24,6 +24,7 @@ spring tool suite(STS)
 *   jquery
 *   bootstrap
 *   awesome font lib
+*   Echarts
 
 ## CORS proxy:
 
