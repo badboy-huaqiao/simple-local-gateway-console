@@ -15,9 +15,11 @@
  * @version: 0.1.0
  *******************************************************************************/
 $(document).ready(function(){
-	//init to load data.
+	//init loading data.
 	deviceServiceModule.loadDeviceServiceList();
 	deviceServiceModule.loadDeviceProfile();
+	
+	//global listener for hiding jsonShow section.
 	document.addEventListener('click',function(event){
 		//$("#device_service_json_format").animate({"right": '-400px'}, "fast");
 		$("#device_service_json_format").hide('fast');
@@ -26,6 +28,7 @@ $(document).ready(function(){
 		event.stopPropagation();
 	});
 	
+	//Hand icon circular movement animate
 	var shakee = function(){
 		$("#device_service_list  i").animate({"right":"0"},function(){
 			$("#device_service_list  i").animate({"right":"10px"},shakee());

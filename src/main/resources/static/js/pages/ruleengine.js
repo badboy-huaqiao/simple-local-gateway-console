@@ -19,7 +19,9 @@ $(document).ready(function(){
 	$("#condition_device_list table").hide();
 	$("#action_device_list table").hide();
 	$("#device_command_list table").hide();
+	ruleEngineModule.loadRuleEngineData();
 	
+	//global listener for hiding device-list section.
 	document.addEventListener('click',function(event){
 		$("#action_device_list table").hide();
 		$("#condition_device_list table").hide();
@@ -31,6 +33,7 @@ $(document).ready(function(){
 		event.stopPropagation();
 	});
 	
+	//bind click event listener for device-ComboGrid-list
 	$("#condition_device_list  .select_panle").on('click',function(event){
 		event.stopPropagation();
 		$("#condition_device_list table").toggle();
@@ -42,8 +45,8 @@ $(document).ready(function(){
 		$("#action_device_list table").toggle();
 		$("#condition_device_list table").hide();
 	});
-	//init load data.
-	ruleEngineModule.loadRuleEngineData();
+	
+	//initialize loading device-ComboGrid data.
 	$.ajax({
 		url:'/core-metadata/api/v1/device',
 		type:'GET',

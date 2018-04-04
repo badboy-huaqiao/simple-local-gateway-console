@@ -36,10 +36,12 @@
 	}
 </style>
 <script type="text/javascript">
+	//locked browser URL change.
 	(function(){
 		window.history.pushState(null, null, "/");
 	})();
-	//防止页面后退
+	
+	//Disable page forward and backward 
     history.pushState(null, null, document.URL);
     window.addEventListener('popstate', function () {
         history.pushState(null, null, document.URL);
@@ -48,8 +50,8 @@
 </script>
 </head>
 <body>
-	<div class="shelter_layer"></div>
-	<div class="msgbox">
+	<div class="main_shelter"></div>
+	<div class="main_msgbox">
 	</div>
 
 	<!-- head bar begin. -->

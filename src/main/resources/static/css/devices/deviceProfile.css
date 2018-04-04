@@ -32,11 +32,6 @@
 	display: none;
 }
 
- div#advanced_profile_sift hr {
-	margin: 0;
-	padding: 0;
-}
-
 #add_profile_dialog {
 	position: fixed;
 	width:300px;

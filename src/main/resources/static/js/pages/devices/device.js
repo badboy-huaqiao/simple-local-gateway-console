@@ -15,9 +15,12 @@
  * @version: 0.1.0
  *******************************************************************************/
 $(document).ready(function(){
+	//init loading data.
 	deviceModule.loadDeviceData();
 	deviceModule.loadServiceSelectData();
 	deviceModule.loadProfileSelectData();
+	
+	//global listener for hiding jsonShow section.
 	document.addEventListener('click',function(event){
 		//$("#device_data_json_format").animate({"right": '-400px'}, "fast");
 		$("#device_data_json_format").hide("fast");
@@ -25,6 +28,8 @@ $(document).ready(function(){
 	document.getElementById("device_data_json_format").addEventListener('click',function(event){
 		event.stopPropagation();
 	});
+	
+	//Hand icon circular movement animate
 	var shakee = function(){
 		$("#device_basic_intro  i").animate({"right":"0"},function(){
 			$("#device_basic_intro  i").animate({"right":"10px"},shakee());
@@ -41,8 +46,7 @@ var deviceModule = {
 				type:'GET',
 				success:function(data){
 					if(data && data.length != 0){
-						
-						deviceModule.renderDeviceGirdList(data);
+						deviceModule.renderDeviceList(data);
 					}
 				},
 				error:function(){
@@ -50,7 +54,7 @@ var deviceModule = {
 				}
 			});
 		},
-		renderDeviceGirdList:function(data){
+		renderDeviceList:function(data){
 			deviceModule.deviceDataCache = data;
 			$("#device_list table tbody").empty();
 			$.each(data,function(index,ele){
@@ -104,7 +108,7 @@ var deviceModule = {
 								url:'/core-metadata/api/v1/device/servicename/' + v + '',
 								type:'GET',
 								success:function(data){
-									deviceModule.renderDeviceGirdList(data);
+									deviceModule.renderDeviceList(data);
 									if(data.length == 0){
 										$("#device_list table tfoot").show()
 									}
@@ -135,7 +139,7 @@ var deviceModule = {
 								url:'/core-metadata/api/v1/device/profilename/' + v + '',
 								type:'GET',
 								success:function(data){
-									deviceModule.renderDeviceGirdList(data);
+									deviceModule.renderDeviceList(data);
 									if(data.length == 0){
 										$("#device_list table tfoot").show()
 									}

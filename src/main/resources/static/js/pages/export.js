@@ -70,15 +70,21 @@ $(document).ready(function(){
     	};
     coreExportModule.exportChart.setOption(option);
     $("#export_data_charts").hide();
+    
+    //global listener for hiding jsonShow section.
     document.addEventListener('click',function(event){
     		$("#export_register_json_format").hide('fast');
     });
+    
+    //Hand icon circular movement animate
     var shakee = function(){
 		$("#add_new_export  i").animate({"right":"0"},function(){
 			$("#add_new_export  i").animate({"right":"10px"},shakee());
 		});
 	}
 	shakee();
+	
+	//global listener for hiding device-list section.
 	document.addEventListener('click',function(event){
 		$("#device_filter_list table").hide();
 		$("#value_desc_filter_list table").hide();
@@ -105,6 +111,7 @@ $(document).ready(function(){
 		$("#device_filter_list table").hide();
 	});
 	
+	//initialize loading device-ComboGrid data.
 	$.ajax({
 		url:'/core-metadata/api/v1/device',
 		type:'GET',

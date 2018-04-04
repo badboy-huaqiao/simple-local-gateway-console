@@ -28,6 +28,7 @@ $(document).ready(function(){
 			}
 		}
 	});
+	
 	//get menu data dynamically.
 	$.ajax({
 		url:"/data/menu.json",
@@ -53,22 +54,22 @@ $(document).ready(function(){
 	
 	//user information control
 	$(".headbar li.user").on("click",function(){
-		$(".msgbox").load("/pages/userInfo.html")
-		$(".msgbox").animate({"right":"0"},"fast");
-		$(".shelter_layer").show("fast");
+		$(".main_msgbox").load("/pages/userInfo.html")
+		$(".main_msgbox").animate({"right":"0"},"fast");
+		$(".main_shelter").show("fast");
 	});
 	
 	//notification control
 	$(".headbar li.notification").on("click",function(){
-		$(".msgbox").load("/pages/notification.html")
-		$(".msgbox").animate({"right":"0"},"fast");
-		$(".shelter_layer").show("fast");
+		$(".main_msgbox").load("/pages/notification.html")
+		$(".main_msgbox").animate({"right":"0"},"fast");
+		$(".main_shelter").show("fast");
 	});
 	
 	//globe shelter control
-	$(".shelter_layer").on("click",function(){
-		$(".shelter_layer").hide("fast");
-		$(".msgbox").animate({"right":"-400px"},"fast");
+	$(".main_shelter").on("click",function(){
+		$(".main_shelter").hide("fast");
+		$(".main_msgbox").animate({"right":"-400px"},"fast");
 	});
 	
 	//render side_bar menu dynamically when load index page.
@@ -105,7 +106,7 @@ $(document).ready(function(){
 				$(this).children("div").slideToggle("normal");
 				return;
 			}
-			//if current node is leaf node，load html resource.
+			
 			//if no select one gateway instance,not load other resource.
 			if( window.sessionStorage.getItem('selectedGateway') == null ){
 				//alert('please select a gateway instance firstly!');
@@ -113,6 +114,7 @@ $(document).ready(function(){
 			};
 			$(".sidebar li").not($(this)).css({color:'',borderBottom: '',borderBottomColor:''});
 			$(this).css({color:'#339933',borderBottom: '2px solid',borderBottomColor:'#339933'});
+			//if current node is leaf node，load html resource.
 			$(".center").load($(this).attr("url"));
 		});
 	}
