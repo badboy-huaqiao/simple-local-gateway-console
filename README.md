@@ -67,8 +67,8 @@ or you can  pull the whole project to your Eclipse IDE(Recommend STS IDE).
 6.  all data from EdgeX Foundry can be showed in json formatter,which will be used to developer.
 7.  Export Registration data can be previewed.
 
-![Image text]](https://raw.github.com/badboy-huaqiao/repository/master/simple-local-gateway-console/image/device.png)  
-![Image text]](https://raw.github.com/badboy-huaqiao/repository/master/simple-local-gateway-console/image/export_data_show.jpg) 
+![altText](https://raw.githubusercontent.com/badboy-huaqiao/simple-local-gateway-console/master/image/device.png)  
+![altText](https://raw.githubusercontent.com/badboy-huaqiao/simple-local-gateway-console/master/image/export_data_show.jpg) 
 
 ## the further 
 
