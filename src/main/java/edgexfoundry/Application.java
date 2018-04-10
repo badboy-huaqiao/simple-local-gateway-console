@@ -20,11 +20,21 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.web.servlet.ServletComponentScan;
 import org.springframework.cloud.netflix.zuul.EnableZuulProxy;
+import org.springframework.context.annotation.Bean;
+import org.springframework.data.jpa.repository.config.EnableJpaAuditing;
+
+import edgexfoundry.filter.DynamicProxyFilter;
 
 @SpringBootApplication
 @EnableZuulProxy
 @ServletComponentScan
+@EnableJpaAuditing
 public class Application{
+	
+	@Bean
+	public DynamicProxyFilter dynamicProxyFilter() {
+		return new DynamicProxyFilter();
+	}
 	
 	public static void main(String[] args) {
 		SpringApplication.run(Application.class, args);

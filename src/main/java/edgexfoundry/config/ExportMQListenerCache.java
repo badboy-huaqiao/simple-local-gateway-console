@@ -16,15 +16,17 @@
  *******************************************************************************/
 package edgexfoundry.config;
 
-import java.util.HashMap;
 import java.util.Map;
+import java.util.concurrent.ConcurrentHashMap;
 
-public class ZuulDynamicProxyCache {	
-	
-	//Gateway Instance Mapping ==> <sessionID,originHostIP>
-	private static final Map<String,String> proxyMapping = new HashMap<>();
-	
-	public static Map<String, String> getProxymapping() {
-		return proxyMapping;
+import edgexfoundry.message.MQListener;
+
+public class ExportMQListenerCache {
+
+	//Export MQTT client cache ==> <topic + brokerIP,MQListener>
+	private static final Map<String,MQListener> exportSubscribe = new ConcurrentHashMap<>();
+	public static Map<String,MQListener> getExportMQ() {
+		return exportSubscribe;
 	}
+	
 }

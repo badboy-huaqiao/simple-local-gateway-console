@@ -25,6 +25,7 @@ import javax.websocket.EndpointConfig;
 import javax.websocket.OnClose;
 import javax.websocket.OnMessage;
 import javax.websocket.OnOpen;
+import javax.websocket.PongMessage;
 import javax.websocket.Session;
 import javax.websocket.server.ServerEndpoint;
 
@@ -45,7 +46,7 @@ public class WebSocketServer {
 		message = message.replaceAll(">", "&gt;");
 		message = message.replaceAll("\\s", "");
 		message = message.replaceAll("\n", "");
-		logger.error("msg from mqtt: " + message);
+		//logger.error("msg from mqtt: " + message);
 		for(Session session : queue) {
 			if(session.isOpen()) {
 				try {
@@ -61,6 +62,8 @@ public class WebSocketServer {
 	@OnOpen
 	public void onOpen(Session session, EndpointConfig conf) {
 		/* Register this connection in the queue */
+		logger.info("websocket timeout :"  + Long.toString(session.getMaxIdleTimeout()));
+		session.setMaxIdleTimeout(300000);//5 minute
 		queue.add(session);
 		logger.info(queue.size() + " client connected success.");
 	}
@@ -68,6 +71,11 @@ public class WebSocketServer {
 	@OnMessage
 	public void onMessage(Session session, String msg) {
 		
+	}
+	
+	@OnMessage
+	public void pongMessage(Session session, PongMessage msg) {
+		logger.info(msg + " from " + session.getId());
 	}
 	
 	@OnClose

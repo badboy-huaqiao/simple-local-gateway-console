@@ -22,7 +22,7 @@ import java.net.URL;
 import com.netflix.zuul.ZuulFilter;
 import com.netflix.zuul.context.RequestContext;
 
-import edgexfoundry.config.ZuulDynamicProxyConfig;
+import edgexfoundry.config.ZuulDynamicProxyCache;
 
 public class DynamicProxyFilter extends ZuulFilter {
 	
@@ -36,7 +36,7 @@ public class DynamicProxyFilter extends ZuulFilter {
 		RequestContext ctx = RequestContext.getCurrentContext();
 		String sessionID = ctx.getRequest().getSession().getId();
 		
-		String originHostURL = "http://" + ZuulDynamicProxyConfig.getProxymapping().get(sessionID);
+		String originHostURL = "http://" + ZuulDynamicProxyCache.getProxymapping().get(sessionID);
 		
 		String reqPath = ctx.getRequest().getRequestURI();
 		

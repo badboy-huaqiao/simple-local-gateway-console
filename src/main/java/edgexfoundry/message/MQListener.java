@@ -16,7 +16,6 @@
  *******************************************************************************/
 package edgexfoundry.message;
 
-import javax.annotation.PostConstruct;
 import javax.annotation.PreDestroy;
 
 import org.eclipse.paho.client.mqttv3.IMqttDeliveryToken;
@@ -27,50 +26,58 @@ import org.eclipse.paho.client.mqttv3.MqttException;
 import org.eclipse.paho.client.mqttv3.MqttMessage;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.stereotype.Component;
 
-@Component
-public class IncomingDataListener implements MqttCallback {
+public class MQListener implements MqttCallback {
 
-	private static final Logger logger = LoggerFactory.getLogger(WebSocketServer.class);
+	private static final Logger logger = LoggerFactory.getLogger(MQListener.class);
 	
 	private MqttClient client;
 	
-	private String protocol = "tcp";
-	private String brokerHost = "10.112.122.28";
-	private String port = "1883";
-	private String topic = "test-register-01";
-	private String user = "huaqiao_zhang";
-	private String password = "1234";
-	private String clientId = "incomingDataSubscriber";
+	private String protocol;
+	private String broker;
+	private String port;
+	private String topic;
+	private String user;
+	private String password;
+	private String clientId = "MQListener";
 	private int qos = 0;
-	private int keepAlive = 3600; //one hour.
+	private int keepAlive = 3600; //1 hour.
 	
-	@PostConstruct
-	public void init() {
-		startListening();
+	public MQListener(String broker,String port,String user,String password,String topic) {
+		super();
+		this.broker = broker;
+		this.port = port;
+		this.user = user;
+		this.password = password;
+		this.topic = topic;
+		this.startListening();
 	}
 	
 	private void startListening() {
-		String url = protocol + "://" + brokerHost + ":" + port;
+		String url =  broker + ":" + port;
 		try {
-			client = new MqttClient(url, clientId);
+			client = new MqttClient(url, clientId + user);
+			client.setCallback(this);
 			MqttConnectOptions connOpts = new MqttConnectOptions();
 			connOpts.setUserName(user);
 			connOpts.setPassword(password.toCharArray());
 			connOpts.setCleanSession(true);
 			connOpts.setKeepAliveInterval(keepAlive);
 			client.connect(connOpts);
-			client.setCallback(this);
+			
+			logger.info("Start listening topic[ " + topic + " ] from MQTT broker. ");
 			client.subscribe(topic, qos);
 		} catch (MqttException e) {
+			logger.error("Unable to create new MqttClient. ");
 			e.printStackTrace();
 			client = null;
 		}
 	}
 	
+	
 	@PreDestroy
 	public void cleanup() throws MqttException {
+		logger.info("disconnect from mqtt  before destory");
 		client.disconnect();
 		client.close();
 	}
@@ -86,17 +93,67 @@ public class IncomingDataListener implements MqttCallback {
 	//reconnect when disconnect.
 	@Override
 	public void connectionLost(Throwable arg0) {
+		logger.error("disconnet to MQTT broker.");
 		try {
 			client.close();
 		} catch (MqttException e) {
-			System.out.println("Unable to close the client.");
+			logger.error("Unable to close the MQTT client.");
 			e.printStackTrace();
 		}
+		logger.info("reconnet to MQTT broker.");
 		startListening();
 	}
 
 	@Override
 	public void deliveryComplete(IMqttDeliveryToken arg0) {
 		System.out.println("Incoming data delivery complete.");
+	}
+
+	public String getProtocol() {
+		return protocol;
+	}
+
+	public void setProtocol(String protocol) {
+		this.protocol = protocol;
+	}
+
+	public String getBroker() {
+		return broker;
+	}
+
+	public void setBroker(String broker) {
+		this.broker = broker;
+	}
+
+	public String getPort() {
+		return port;
+	}
+
+	public void setPort(String port) {
+		this.port = port;
+	}
+
+	public String getTopic() {
+		return topic;
+	}
+
+	public void setTopic(String topic) {
+		this.topic = topic;
+	}
+
+	public String getUser() {
+		return user;
+	}
+
+	public void setUser(String user) {
+		this.user = user;
+	}
+
+	public String getPassword() {
+		return password;
+	}
+
+	public void setPassword(String password) {
+		this.password = password;
 	}
 }

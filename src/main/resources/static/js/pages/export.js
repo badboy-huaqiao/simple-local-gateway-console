@@ -142,6 +142,8 @@ $(document).ready(function(){
 					coreExportModule.deviceFilterSelected.splice(coreExportModule.deviceFilterSelected.indexOf($(this).val()),1);
 					$("#device_filter_list .select_panle input[name='deviceName']").val(coreExportModule.deviceFilterSelected.toString());
 				}
+				
+				//valueDescriptor List bind checkbox event
 				$("#value_desc_filter_list table > tbody").empty();
 				if(coreExportModule.deviceReadingValueSelected.length != 0 ){
 					$.each(coreExportModule.deviceReadingValueSelected,function(i,name){
@@ -273,6 +275,14 @@ var coreExportModule = {
 						$(this).removeClass();
 						$(td).attr("enable","true") ;
 						coreExportModule.webSocketMsg();
+						//create mqttClient if not exist
+						$.ajax({
+							url:'/api/v1/exportshow',
+							type:'POST',
+							contentType:'application/json',
+							data:JSON.stringify(coreExportModule.selectedRow.addressable),
+							success:function(){}
+						});
 						return 'fa fa-unlock fa-lg';	
 					}else{
 						coreExportBtnGroup.isEnableExport(false);
@@ -304,9 +314,29 @@ var coreExportModule = {
 				 div.scrollTop = div.scrollHeight;
 				 $("#websocket_msg_content table tbody tr:odd").css({color:'#7CFC00'});
 				 var d = JSON.parse(event.data);
-				 var dataMapping = {'AnalogValue_40':"temperature",'AnalogValue_22':"humidity",
-						 'HoldingRegister_8455':"OutputVoltage",'HoldingRegister_8454':'RPM'} 
+//				 var dataMapping = {'AnalogValue_40':"temperature",'AnalogValue_22':"humidity",
+//						 'HoldingRegister_8455':"OutputVoltage",'HoldingRegister_8454':'RPM'} 
 				 var echartOpts = coreExportModule.exportChart.getOption();
+//				 if(echartOpts.legend.data.indexOf(d.device) == -1){
+//					 echartOpts.legend.data.push(d.device);
+//					 echartOpts.xAxis[0].data.push(d.readings[0].name)
+//					 var o = {}
+//					 o["name"] = d.device;
+//					 o["type"] = "bar";
+//					 o["data"] = new Array(echartOpts.xAxis[0].data.length)
+//					 o["data"].push(d.readings[0].value)
+//					 echartOpts.series.push(o);
+//					 coreExportModule.exportChart.setOption(echartOpts);
+//				 } else {
+//					 $.each(echartOpts.series,function(i,s){
+//						 if(s.name == d.device){
+//							 s.data.splice(echartOpts.xAxis[0].data.indexOf(d.readings[0].name),1,d.readings[0].name);
+//							 coreExportModule.exportChart.setOption(echartOpts);
+//							 return false
+//						 }
+//					 });
+//				 }
+				 
 				 if(d.device == "KMC.BAC-121036CE01"){
 					 if(d.readings[0].name == 'AnalogValue_40'){
 						 echartOpts.series[0].data.splice(0,1,d.readings[0].value);
@@ -321,7 +351,6 @@ var coreExportModule = {
 					 }else if(d.readings[0].name == 'HoldingRegister_8454'){
 						 echartOpts.series[1].data.splice(3,1,d.readings[0].value);
 					 }
-					 
 					 coreExportModule.exportChart.setOption(echartOpts);
 				 }
 			}	
@@ -330,7 +359,7 @@ var coreExportModule = {
 			//coreExportModule.webSocket.close();
 		},
 		echartShow:function(data){
-			
+			//not used
 		}
 }
 var coreExportBtnGroup = {
@@ -476,6 +505,15 @@ var coreExportBtnGroup = {
 					coreExportModule.loadExportData();
 				}
 			});
+			if(exportRegister['enable']){
+				$.ajax({
+					url:'/api/v1/exportshow',
+					type:'POST',
+					contentType:'application/json',
+					data:JSON.stringify(exportAddr),
+					success:function(){}
+				});
+			}
 		},
 		update:function(){
 			$("div.core_export_shelter").show('fast');
@@ -523,6 +561,14 @@ var coreExportBtnGroup = {
 						$("#add_new_export").hide();
 					},1000);
 				}
+			});
+			//update MQListener Cache.
+			$.ajax({
+				url:'/api/v1/exportshow',
+				type:'PUT',
+				contentType:'application/json',
+				data:JSON.stringify(exportAddr),
+				success:function(){}
 			});
 		},
 		isEnableExport:function(enable){

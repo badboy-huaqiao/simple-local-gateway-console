@@ -28,21 +28,21 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
-import edgexfoundry.config.ZuulDynamicProxyConfig;
+import edgexfoundry.config.ZuulDynamicProxyCache;
 import edgexfoundry.domain.GatewayInfo;
 import edgexfoundry.repository.GatewayJpaRepository;
 
 @RestController
 @RequestMapping(value="/core-gateway/api/v1")
-public class DynamicProxyController {
+public class ZuulDynamicProxyController {
 
 		@Autowired
 		GatewayJpaRepository gatewayInfoRepos;
 	
 		@RequestMapping(value="/proxy/host",method=RequestMethod.POST)
 		public String dynamicConfigProxy(@RequestBody Map<String,String> originHostIP,HttpServletRequest req) {
-			synchronized (ZuulDynamicProxyConfig.class) {
-				ZuulDynamicProxyConfig.getProxymapping().put(req.getSession().getId(), originHostIP.get("hostIP"));
+			synchronized (this.getClass()) {
+				ZuulDynamicProxyCache.getProxymapping().put(req.getSession().getId(), originHostIP.get("hostIP"));
 			}
 			return "success";
 		}
