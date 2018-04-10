@@ -33,15 +33,14 @@ spring tool suite(STS)
 
 ## config proxy to edgexfoundry microservice to solve CORS
 
-
 	zuul.routes.core-command.path=/core-command/**
-	#there will be dynamic revserse proxy,don't config there if you want to manage multi-gateway
+	#there will be dynamic revserse proxy,don't hard-code config there if you want to manage multi-gateway
 	#zuul.routes.core-command.url=http://10.117.170.136:48082/
-zuul.routes.core-metadata.path=/core-metadata/**
-zuul.routes.core-data.path=/core-data/**
-zuul.routes.core-export.path=/core-export/**
-zuul.routes.rule-engine.path=/rule-engine/**
 
+	zuul.routes.core-metadata.path=/core-metadata/**
+	zuul.routes.core-data.path=/core-data/**
+	zuul.routes.core-export.path=/core-export/**
+	zuul.routes.rule-engine.path=/rule-engine/**
 
 ## how to start:
 
@@ -67,6 +66,7 @@ or you can  pull the whole project to your Eclipse IDE(Recommend STS IDE).
 4.  gateway instance CRUD with h2-database(a memory DB,will be placed with persistence DB further.)
 5.  force user to choose one gateway instance before operating other function module.
 6.  all data from EdgeX Foundry can be showed in json formatter,which will be used to developer.
+7.  Export Registration data can be previewed.
 
 ## the further 
 
