@@ -45,7 +45,6 @@ spring tool suite(STS)
 ## how to start:
 
 *   copy the docker-files folder to your host.
-*   Modify the proxy path IP in the application.properties file,IP that points to the EdgeX Foundry host.
 *   the administrator account is admin/admin,you can custom account in application.properties file before you start the app.
 
 Under the docker-files folder,execute the following command:
@@ -67,6 +66,9 @@ or you can  pull the whole project to your Eclipse IDE(Recommend STS IDE).
 5.  force user to choose one gateway instance before operating other function module.
 6.  all data from EdgeX Foundry can be showed in json formatter,which will be used to developer.
 7.  Export Registration data can be previewed.
+
+![altText](https://raw.github.com/badboy-huaqiao/repository/master/simple-local-gateway-console/image/device.jpg)  
+![altText](https://raw.github.com/badboy-huaqiao/repository/master/simple-local-gateway-console/image/export data show.jpg) 
 
 ## the further 
 
