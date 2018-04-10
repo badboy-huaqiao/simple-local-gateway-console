@@ -72,7 +72,7 @@ https://www.youtube.com/watch?v=2EOHR_gUeic&feature=youtu.be
 7.  Export Registration data can be previewed.
 
 ![altText](https://raw.githubusercontent.com/badboy-huaqiao/simple-local-gateway-console/master/image/device.png)  
-![altText](https://raw.githubusercontent.com/badboy-huaqiao/simple-local-gateway-console/master/image/export_data_show.jpg) 
+![altText](https://raw.githubusercontent.com/badboy-huaqiao/simple-local-gateway-console/master/image/export_data_show.png) 
 
 ## the further 
 
