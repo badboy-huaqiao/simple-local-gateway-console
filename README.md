@@ -57,14 +57,18 @@ then enter the http://your_host:4000 in the browser
 or you can  pull the whole project to your Eclipse IDE(Recommend STS IDE).
 
 
+## there is a video demo will be useful for beginner
+
+https://www.youtube.com/watch?v=2EOHR_gUeic&feature=youtu.be
+
 ## Completed functions
 
 1.  the CRUD of Device,Device Service,Device Profile,Export Register,Rule Engine.
 2.  Gateway(multi-instances)management sharing one web UI.
-3.  user login auth.
-4.  gateway instance CRUD with h2-database(a memory DB,will be placed with persistence DB further.)
-5.  force user to choose one gateway instance before operating other function module.
-6.  all data from EdgeX Foundry can be showed in json formatter,which will be used to developer.
+3.  Gateway instance CRUD with h2-database(a memory DB,will be placed with persistence DB further.)
+4.  user login auth.
+5.  user choose one gateway instance before operating other function module.
+6.  all data from EdgeX Foundry can be showed in json formatter,which will be useful for developer.
 7.  Export Registration data can be previewed.
 
 ![altText](https://raw.githubusercontent.com/badboy-huaqiao/simple-local-gateway-console/master/image/device.png)  
