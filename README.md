@@ -32,17 +32,15 @@ spring tool suite(STS)
 
 
 ## config proxy to edgexfoundry microservice to solve CORS
-find application.properties file , and modify the host_ip of yours
+
 
 	zuul.routes.core-command.path=/core-command/**
-	
-	#there will be dynamic revserse proxy,don't hard-code config if you want to manage multi-gateway
-	zuul.routes.core-command.url=http://edgex_foundry_host:48082/
-	
-	zuul.routes.core-metadata.path=/core-metadata/**
-	
-	#there will be dynamic revserse proxy,don't hard-code config if you want to manage multi-gateway
-	zuul.routes.core-metadata.url=http://edgex_foundry_host:48081/
+	#there will be dynamic revserse proxy,don't config there if you want to manage multi-gateway
+	#zuul.routes.core-command.url=http://10.117.170.136:48082/
+zuul.routes.core-metadata.path=/core-metadata/**
+zuul.routes.core-data.path=/core-data/**
+zuul.routes.core-export.path=/core-export/**
+zuul.routes.rule-engine.path=/rule-engine/**
 
 
 ## how to start:
