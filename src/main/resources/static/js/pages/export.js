@@ -492,11 +492,12 @@ var coreExportBtnGroup = {
 			exportAddr['user'] = $("#add_new_export input[name='user']").val();
 			exportAddr['password'] = $("#add_new_export input[name='password']").val();
 			exportAddr['topic'] = $("#add_new_export input[name='topic']").val();
-			exportAddr['method'] = "POST";
-			exportAddr['protocol'] = "TCP";
+			exportAddr['method'] = $("#add_new_export select[name='method']").val();;
+			exportAddr['protocol'] = $("#add_new_export select[name='protocol']").val();
 
 			exportRegister['addressable'] = exportAddr;	
 			exportRegister['filter'] = exportFilter;
+			console.dir(exportRegister);
 			$.ajax({
 				url:'/core-export/api/v1/registration',
 				type:'POST',
@@ -543,8 +544,8 @@ var coreExportBtnGroup = {
 			exportAddr['user'] = $("#add_new_export input[name='user']").val();
 			exportAddr['password'] = $("#add_new_export input[name='password']").val();
 			exportAddr['topic'] = $("#add_new_export input[name='topic']").val();
-			exportAddr['method'] = "POST";
-			exportAddr['protocol'] = "TCP";
+			exportAddr['method'] = $("#add_new_export select[name='method']").val();;
+			exportAddr['protocol'] = $("#add_new_export select[name='protocol']").val();
 			exportRegister['addressable'] = exportAddr;	
 			exportRegister['filter'] = exportFilter;
 			console.dir(exportRegister);

@@ -42,6 +42,7 @@ public class ExportShowController {
 		}
 		
 		MQListener mqListener = new MQListener(
+				address.getProtocol(),
 				address.getAddress(),
 				String.valueOf(address.getPort()),
 				address.getUser(),
@@ -63,6 +64,7 @@ public class ExportShowController {
 		ExportMQListenerCache.getExportMQ().remove(address.getTopic() + address.getAddress());
 		
 		mqListener = new MQListener(
+				address.getProtocol(),
 				address.getAddress(),
 				String.valueOf(address.getPort()),
 				address.getUser(),

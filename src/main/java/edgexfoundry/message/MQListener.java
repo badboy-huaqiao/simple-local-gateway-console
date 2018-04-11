@@ -43,8 +43,9 @@ public class MQListener implements MqttCallback {
 	private int qos = 0;
 	private int keepAlive = 3600; //1 hour.
 	
-	public MQListener(String broker,String port,String user,String password,String topic) {
+	public MQListener(String protocol,String broker,String port,String user,String password,String topic) {
 		super();
+		this.protocol = protocol;
 		this.broker = broker;
 		this.port = port;
 		this.user = user;
@@ -54,6 +55,7 @@ public class MQListener implements MqttCallback {
 	}
 	
 	private void startListening() {
+		//String url = protocol.toLowerCase() + "://" + broker + ":" + port;
 		String url =  broker + ":" + port;
 		try {
 			client = new MqttClient(url, clientId + user);

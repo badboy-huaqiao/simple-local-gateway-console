@@ -152,15 +152,25 @@
 						<td>Name</td>
 						<td><input type="text" name="addressName"
 							class="form-control" placeholder="address name unique"></td>
+						<td>Protocol</td>
+						<td><select name="protocol" class="form-control">
+								<option value="TCP">TCP</option>
+								<option value="HTTP">HTTP</option>
+								<option value="ZMQ">ZMQ</option>
+								<option value="MAC">MAC</option>
+								<option value="OTHER">OTHER</option>
+						</select></td>
 						<td>Address</td>
 						<td><input type="text" name="address" class="form-control"
 							placeholder=""></td>
 						<td>Port</td>
 						<td><input type="text" name="port" class="form-control"
 							placeholder=""></td>
-						<td>Path</td>
-						<td><input type="text" name="path" class="form-control"
-							placeholder=""></td>
+						<td>Method</td>
+						<td><select name="method" class="form-control">
+								<option value="POST">POST</option>
+								<option value="GET">GET</option>
+						</select></td>
 					</tr>
 					<tr>
 						<td>Publisher</td>
@@ -175,6 +185,9 @@
 						<td>Topic</td>
 						<td><input type="text" name="topic" class="form-control"
 							placeholder=""></td>
+						<td>Path</td>
+						<td><input type="text" name="path" class="form-control"
+							placeholder="for callback"></td>
 					</tr>
 				</table>
 			</div>
