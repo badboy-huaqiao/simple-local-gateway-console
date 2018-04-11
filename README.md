@@ -49,7 +49,7 @@ spring tool suite(STS)
 
 Under the docker-files folder,execute the following command:
 
-	java -jar -Dspring.config.location=./application.properties simple-local-gateway-console.jar &
+	java -jar -Dspring.config.location=./application.properties simple-edgex-foundry-console.jar &
 
 	
 then enter the http://your_host:4000 in the browser

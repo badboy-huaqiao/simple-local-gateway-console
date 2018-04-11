@@ -307,6 +307,10 @@ var coreExportModule = {
 			        alert("your browser not support WebSocket.");
 			    }
 			}
+			coreExportModule.webSocket.addEventListener('open', function (event) {
+				//web socket heart beat per 10 seconds.
+				window.setInterval(function(){coreExportModule.webSocket.send("ping")},10000);
+			});
 			coreExportModule.webSocket.onmessage = function(event){
 				//console.log(event.data);
 				 $("#websocket_msg_content table tbody").append('<tr><td>' + event.data + '</td></tr>');
@@ -594,7 +598,6 @@ var coreExportBtnGroup = {
 			$("#export_register_json_format").toggle();
 		}
 }
-
 
 var testExportData = [
     {
