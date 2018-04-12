@@ -140,5 +140,8 @@ var deviceProfileModuleBtnGroup = {
 				$('#add_profile_dialog').hide('fast');
 			}
 		}
+	},
+	downloadProfileTemplate : function() {
+		window.location.href="/api/v1/profile/downloadTempalte"
 	}
 }
