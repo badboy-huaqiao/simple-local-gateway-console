@@ -236,7 +236,7 @@ var deviceModuleBtnGroup = {
 			var method = $('#device_detail #command_list tbody input[name="commandRadio_'+command.id+'"]:radio:checked').val();
 			if(method == 'set' && command.put != null) {
 				var cmdUrl = command.put.url;
-				cmdUrl = cmdUrl.replace(/http:\/\/[\w(?=.)]+:[0-9]+/g,"/core-command");
+				cmdUrl = cmdUrl.replace(/(\w+):\/\/([^/:]+)(:\d*)?/,"/core-command");
 				var paramBody={};
 				$.each(command.put.parameterNames,function(i,param){
 					//debugger
@@ -260,7 +260,7 @@ var deviceModuleBtnGroup = {
 				});
 			} else {
 				var cmdUrl = command.get.url;
-				cmdUrl = cmdUrl.replace(/http:\/\/[\w(?=.)]+:[0-9]+/g,"/core-command");
+			    cmdUrl = cmdUrl.replace(/(\w+):\/\/([^/:]+)(:\d*)?/,"/core-command");
 				$.ajax({
 					url:cmdUrl,
 					type:'GET',
