@@ -309,7 +309,11 @@ var coreExportModule = {
 			}
 			coreExportModule.webSocket.addEventListener('open', function (event) {
 				//web socket heart beat per 10 seconds.
-				window.setInterval(function(){coreExportModule.webSocket.send("ping")},10000);
+				window.setInterval(function(){
+					if(coreExportModule.webSocket) {
+						coreExportModule.webSocket.send("ping")
+					}
+				},10000);
 			});
 			coreExportModule.webSocket.onmessage = function(event){
 				//console.log(event.data);
@@ -519,6 +523,13 @@ var coreExportBtnGroup = {
 					success:function(){}
 				});
 			}
+//			$.ajax({
+//				url:'/edgex-pulse',
+//				type:'POST',
+//				contentType:'application/json',
+//				data:JSON.stringify(exportRegister),
+//				success:function(){}
+//			});
 		},
 		update:function(){
 			$("div.core_export_shelter").show('fast');
