@@ -110,6 +110,7 @@ $(document).ready(function(){
 			//if no select one gateway instance,not load other resource.
 			if( window.sessionStorage.getItem('selectedGateway') == null ){
 				//alert('please select a gateway instance firstly!');
+				$("#addGatewayInstanceDialog").modal('show');
 				return;
 			};
 			$(".sidebar li").not($(this)).css({color:'',borderBottom: '',borderBottomColor:''});
