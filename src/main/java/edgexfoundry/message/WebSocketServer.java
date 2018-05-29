@@ -46,7 +46,7 @@ public class WebSocketServer {
 		message = message.replaceAll(">", "&gt;");
 		message = message.replaceAll("\\s", "");
 		message = message.replaceAll("\n", "");
-		//logger.error("msg from mqtt: " + message);
+		//logger.info("msg from mqtt: " + message);
 		for(Session session : queue) {
 			if(session.isOpen()) {
 				try {
