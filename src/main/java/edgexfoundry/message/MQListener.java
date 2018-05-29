@@ -58,7 +58,7 @@ public class MQListener implements MqttCallback {
 		//String url = protocol.toLowerCase() + "://" + broker + ":" + port;
 		String url =  broker + ":" + port;
 		try {
-			client = new MqttClient(url, clientId + user);
+			client = new MqttClient(url, clientId + topic);
 			client.setCallback(this);
 			MqttConnectOptions connOpts = new MqttConnectOptions();
 			connOpts.setUserName(user);
