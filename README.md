@@ -1,7 +1,7 @@
 Main Author: Zhang Huaqiao
 Copyright © 2017-2018 VMware, Inc. All Rights Reserved.
 
-#Announcement(声明)
+# Announcement(声明)
 
 This repository will stop updating, please move to the following repository!
 （本仓库不再更新，所有更新都在EdgeXFoundry官方的holding仓库！下面是链接。）
