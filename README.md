@@ -1,6 +1,13 @@
 Main Author: Zhang Huaqiao
 Copyright © 2017-2018 VMware, Inc. All Rights Reserved.
 
+#**Announcement** 
+
+This repository will stop updating, please move to the following repository!
+
+https://github.com/edgexfoundry-holding/edgex-ui-go.git
+https://github.com/edgexfoundry-holding/edgex-ui-go.git
+
 # simple-local-gateway-console
 EdgeX Foundry local gateway devices management platform
 
